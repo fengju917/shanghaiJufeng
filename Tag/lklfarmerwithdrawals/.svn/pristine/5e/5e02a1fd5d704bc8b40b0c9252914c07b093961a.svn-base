@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/lakala_title" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/sys_settings_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25.6dip"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/system_param_set"
+        android:textColor="@color/black"
+        android:textSize="33.28sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="76.8dip"
+        android:layout_marginTop="25.6dip"
+        android:background="@drawable/set_item_back"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/standby_timeout"
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="25.6sp" />
+
+        <EditText
+            android:id="@+id/standby_time_edit"
+            android:layout_width="332.8dip"
+            android:layout_height="wrap_content"
+            android:background="@color/dialog_button"
+            android:inputType="number"
+            android:maxLength="3"
+            android:ellipsize="end"
+            android:textSize="23sp"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="76.8dip"
+        android:layout_marginTop="12.8dip"
+        android:background="@drawable/set_item_back"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/second_batch"
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="25.6sp" />
+
+        <EditText
+            android:id="@+id/second_batch_edit"
+            android:layout_width="332.8dip"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="6"
+            android:background="@color/dialog_button"
+            android:ellipsize="end"
+            android:textSize="23sp"
+            android:singleLine="true" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="76.8dip"
+        android:orientation="horizontal" 
+        android:layout_marginTop="12.8dip"
+        android:background="@drawable/set_item_back"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/second_billno"
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="25.6sp" />
+
+        <EditText
+            android:id="@+id/second_billno_edit"
+            android:layout_width="332.8dip"
+            android:layout_height="wrap_content"
+            android:background="@color/dialog_button"
+            android:inputType="number"
+            android:maxLength="6"
+            android:ellipsize="end"
+            android:textSize="23sp"
+            android:singleLine="true" />
+    </LinearLayout>
+<!-- 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="76.8dip"
+        android:orientation="horizontal" 
+        android:layout_marginTop="12.8dip"
+        android:background="@drawable/set_item_back"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/operator_no"
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="25.6sp" />
+
+        <EditText
+            android:id="@+id/operator_no_edit"
+            android:layout_width="276.8dip"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="2"
+            android:background="@color/dialog_button"
+            android:ellipsize="end"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="76.8dip"
+        android:orientation="horizontal" 
+        android:layout_marginTop="12.8dip"
+        android:background="@drawable/set_item_back"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/operator_pwd"
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="25.6sp" />
+
+        <EditText
+            android:id="@+id/operator_pwd_edit"
+            android:layout_width="276.8dip"
+            android:layout_height="wrap_content"
+            android:background="@color/dialog_button"
+            android:inputType="number"
+            android:maxLength="4"
+            android:ellipsize="end"
+            android:singleLine="true" />
+    </LinearLayout>
+ -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="76.8dip"
+        android:orientation="horizontal" 
+        android:layout_marginTop="12.8dip"
+        android:background="@drawable/set_item_back"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/max_transaction_flow_num"
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="25.6sp" />
+
+        <EditText
+            android:id="@+id/max_transaction_edit"
+            android:layout_width="204.8dip"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="3"
+            android:background="@color/dialog_button"
+            android:ellipsize="end"
+            android:textSize="23sp"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38.4dip"
+        android:background="@drawable/button_style"
+        android:text="@string/save_text"
+        android:textColor="#FFFFFF"
+        android:textSize="30.72sp" />
+    </LinearLayout>
+
+</LinearLayout>

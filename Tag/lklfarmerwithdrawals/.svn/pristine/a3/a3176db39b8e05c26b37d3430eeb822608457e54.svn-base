@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/lakala_title" />
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <ListView
+			android:id="@+id/gridView"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:divider="#00000000"
+			android:listSelector="@drawable/grid_item_selector"
+			android:horizontalSpacing="140.8dip"
+			android:paddingLeft="57.6dip"
+			android:paddingRight="51.2dip"
+			 />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="left|top"
+    android:orientation="vertical" >
+
+    <!-- 标题 -->
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="79dip"
+        android:background="@drawable/topbg"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="20dip"
+            android:layout_height="60dip"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="20dip"
+            android:background="@drawable/return_icon"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/transType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="42sp" />
+
+        <Button
+            android:id="@+id/confirmSave"
+            android:layout_width="172dip"
+            android:layout_height="51dip"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/activate_btn"
+            android:text="@string/confirmchange"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </FrameLayout>
+    <!-- 滚动视图 -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="520dip"
+        android:layout_gravity="left|top"
+        android:background="@drawable/menu_background"
+        android:overScrollMode="always" >
+
+        <LinearLayout
+            android:layout_width="750dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:background="@drawable/menu_background"
+            android:gravity="left|top"
+            android:orientation="vertical" >
+
+            <!-- 显示交易 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/transactionSwitch"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/transactionSwitch"
+                    android:textColor="#FF0000" />
+                <!-- 交易开关设置 -->
+
+                <GridLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:columnCount="4"
+                    android:paddingLeft="120dip"
+                    android:rowCount="2" >
+
+                    <CheckBox
+                        android:id="@+id/consume_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/consume_text" />
+
+                    <CheckBox
+                        android:id="@+id/undo_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/undo_text" />
+
+                    <CheckBox
+                        android:id="@+id/consume_search_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/consume_search_text" />
+
+                    <CheckBox
+                        android:id="@+id/recede_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/recede_text" />
+
+                    <CheckBox
+                        android:id="@+id/pre_warrant_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/pre_warrant" />
+
+                    <CheckBox
+                        android:id="@+id/pre_warrant_undo_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/pre_warrant_undo" />
+
+                    <CheckBox
+                        android:id="@+id/pre_warrant_over_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/pre_warrant_over" />
+
+                    <CheckBox
+                        android:id="@+id/pre_warrant_over_undo_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/pre_warrant_over_undo" />
+                    
+                    <CheckBox
+                        android:id="@+id/up_cash_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/upcash" />
+                    
+                    <CheckBox
+                        android:id="@+id/offline_refund_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/offline_refund" />
+                    
+                    <CheckBox
+                        android:id="@+id/cash_up_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/cash_up" />
+                      
+                    <CheckBox
+                        android:id="@+id/cash_up_viod_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="15dip"
+                        android:text="@string/cash_up_viod" />
+                </GridLayout>
+            </LinearLayout>
+            <!-- 结算后自动签退 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/linearlayout_press_style"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/autoSignout"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/autoSignout" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    style="@style/imageview_box_style"
+                    android:id="@+id/settle_auto_signout_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+            <!-- 小费百分比 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/xiaofee"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/xiaofee" />
+
+                <EditText
+                    android:id="@+id/xiaofeiVal"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 消息重发次数 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/message_resend_time"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/messageresendtime" />
+
+                <EditText
+                    android:id="@+id/messageresendtimeVal"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 打印张数 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/print_num"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/print_num" />
+
+                <EditText
+                    android:id="@+id/printnumVal"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 最大交易笔数 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/max_trans_num"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/max_trans_num" />
+
+                <EditText
+                    android:id="@+id/maxtransnumVal"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 是否支持手工输入卡号 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linearlayout_press_style"
+                android:gravity="center"
+                android:onClick="surpportManual"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/support_manual_input_cardno"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:text="@string/support_manual_input_card_no" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/support_manual_input_card_noVal"
+                    android:layout_width="30dip"
+                    android:layout_height="30dip"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/choose_no"
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

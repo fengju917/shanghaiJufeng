@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="800dip"
+        android:layout_height="79dip"
+        layout="@layout/lakala_title" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/operator_pwd_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:text="@string/operator_pwd_reset"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+
+        <LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="60dip"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/input_pwd"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/first_pwd_edit"
+                android:layout_width="260dip"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_button"
+                android:ellipsize="end"
+                android:maxLength="6"
+                android:inputType="numberPassword"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="60dip"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/input_pwd_again"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/second_paw_edit"
+                android:layout_width="260dip"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_button"
+                android:ellipsize="end"
+                android:maxLength="6"
+                android:inputType="numberPassword"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="250dip"
+            android:layout_height="57dip"
+            android:layout_marginTop="60dip"
+            android:background="@drawable/button_style"
+            android:text="@string/comfirm_text"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</LinearLayout>

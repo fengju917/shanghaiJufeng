@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/lakala_title" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="38.4dp"
+            android:text="是否支持手工输入卡号："
+            android:layout_marginLeft="25.6dip"/>
+        <RadioGroup
+            android:id="@+id/check_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <RadioButton
+                android:id="@+id/on"
+                android:layout_width="wrap_content"
+                android:layout_height="102.4dip"
+                android:layout_marginLeft="1.28dip"
+                android:layout_marginTop="1.28dip"
+                android:textSize="32.0dp"
+                android:text="支持"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/off"
+                android:layout_width="wrap_content"
+                android:layout_height="102.4dip"
+                android:layout_marginLeft="1.28dip"
+                android:layout_marginTop="1.28dip"
+                android:textSize="32.0dp"
+                android:text="不支持"
+                android:textColor="#000000" />
+        </RadioGroup>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/menu_background"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/lakala_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="60dip"
+        android:text="请选择取款的金额:"
+        android:textColor="@color/black"
+        android:textSize="50dp" />
+
+    <GridView
+        android:id="@+id/gv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="60dip"
+        android:horizontalSpacing="10dp"
+        android:numColumns="5"
+        android:verticalSpacing="15dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/other_btn"
+            android:layout_width="200dip"
+            android:layout_height="100dip"
+            android:background="@drawable/other_money_btn"
+            android:button="@null"
+            android:gravity="center"
+            android:text="其他金额"
+            android:textColor="#0075BD"
+            android:textSize="30dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/input_money"
+                android:layout_width="675dip"
+                android:layout_height="100dip"
+                android:layout_marginLeft="35dip"
+                android:background="@drawable/input"
+                android:maxLength="10"
+                android:textSize="45dp" />
+
+            <ImageView
+                android:id="@+id/im_attetion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dip"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_money_zhuyi" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="400dip"
+            android:layout_height="80dip"
+            android:background="@drawable/activate_btn"
+            android:gravity="center"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+</LinearLayout>

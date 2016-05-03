@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TradeRoot>
+<!-- 指定账户圈存流程 
+	第一个组件节点：默认都是该交易流程的第一个组件
+	Condition对象中下一组件节点号为“0”，默认是返回主菜单-->
+<Transaction mctCode = "002322">
+    <ComponentNode curNodeId = "1">
+        <componentName>com.lkl.farmer.transferswipe</componentName>
+        <Condition value= "1">2</Condition>
+    </ComponentNode>    
+    <ComponentNode curNodeId = "2">
+        <componentName>com.lkl.farmer.consume.inputMoney</componentName>
+        <Condition value= "1">3</Condition>
+    </ComponentNode>
+    
+	<ComponentNode curNodeId = "3">
+        <componentName>com.lkl.farmer.inputPassword</componentName>
+        <Condition value = "1">4</Condition>
+        <Condition value = "2">0</Condition>
+    </ComponentNode>
+	<ComponentNode curNodeId = "4">
+        <componentName>com.lkl.farmer.progress</componentName>
+        <Condition value = "1">5</Condition>
+    </ComponentNode>
+	<ComponentNode curNodeId = "5">
+        <componentName>com.lkl.farmer.showresult</componentName>
+        <Condition value = "1">0</Condition>
+    </ComponentNode>
+</Transaction>
+</TradeRoot>

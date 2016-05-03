@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="800dip"
+        android:layout_height="79dip"
+        layout="@layout/lakala_title" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/connect_set_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="@string/connect_set_text"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+        <!-- 网络模式选择 -->
+
+        <LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="60dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="left|center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connect_mode"
+                android:layout_marginLeft="30dip"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/connect_mode"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:entries="@array/connectmodes"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="60dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connect_address_text"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/connect_address_edit"
+                android:layout_width="260dip"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_button"
+                android:ellipsize="end"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="60dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/download_address_text"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/download_address_edti"
+                android:layout_width="260dip"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_button"
+                android:ellipsize="end"
+                android:singleLine="true" />
+        </LinearLayout>
+        
+        <!-- add by xrh begin -->
+         <LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="60dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tpdu"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/tpud_edit"
+                android:layout_width="260dip"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="10"
+                android:background="@color/dialog_button"
+                android:ellipsize="end"
+                android:singleLine="true" />
+        </LinearLayout>
+        
+         <LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="60dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transaction_timeout"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/tran_timeout_edit"
+                android:layout_width="260dip"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_button"
+                android:inputType="number"
+                android:maxLength="3"
+                android:ellipsize="end"
+                android:singleLine="true" />
+         </LinearLayout>
+         <LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="60dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flushes_times"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/flushes_times_edit"
+                android:layout_width="260dip"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_button"
+                android:inputType="number"
+                android:maxLength="2"
+                android:ellipsize="end"
+                android:singleLine="true" />
+         </LinearLayout>  
+         
+         <!-- add by xrh end  -->
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="250dip"
+            android:layout_height="57dip"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/button_style"
+            android:text="@string/save_text"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</LinearLayout>

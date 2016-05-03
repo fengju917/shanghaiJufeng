@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center|top">
+
+    <include
+        android:layout_width="800dip"
+        android:layout_height="79dip"
+        layout="@layout/lakala_title" />
+
+    <LinearLayout
+        android:layout_width="457dip"
+        android:layout_height="69dip"
+        android:layout_marginTop="40dip"
+        android:orientation="horizontal" 
+        android:background="@drawable/set_item_back"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dip"
+            android:text="@string/contact_no"
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/contac_no_text"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:textSize="20dp" 
+            android:background="@color/dialog_button"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="457dip"
+        android:layout_height="69dip"
+        android:layout_marginTop="20dip"
+        android:orientation="horizontal" 
+        android:background="@drawable/set_item_back"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dip"
+            android:text="@string/term_number"
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/term_no_text"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:textSize="20dp"
+            android:background="@color/dialog_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="457dip"
+        android:layout_height="69dip"
+        android:layout_marginTop="20dip"
+        android:orientation="horizontal"
+        android:background="@drawable/set_item_back"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dip"
+            android:text="@string/cer_pwd" 
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/cerpwd_text"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:inputType="numberPassword" 
+            android:textSize="20dp"
+            android:maxLength="6"
+            android:background="@color/dialog_button"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ok_button"
+        android:layout_width="250dip"
+        android:layout_height="57dip"
+        android:layout_marginTop="50dip"
+        android:background="@drawable/button_style"
+        android:text="确定"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp" />
+
+</LinearLayout>

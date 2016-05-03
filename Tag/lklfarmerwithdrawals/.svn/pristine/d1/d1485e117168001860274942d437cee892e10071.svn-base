@@ -1,0 +1,852 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<root>
+<!--
+	process标签中对应的元素解释如下：
+		code:标识某个交易类型，取值由用户自定义
+		type:标识某个process对应的是组包控制对象还是解包控制对象，取值有：
+			PACK：表示为组包
+			UNPACK：表示为解包
+-->
+<!--余额查询请求-->
+<process code = "002301" type = "PACK">	<!--code属性为自定义属性值，由用户自定义，表明该流程下配置的交易方式-->
+	<!--
+		length:表明该数据域长度值，如果是变长数据域，则该属性值表示为变长数据最大值
+		length-type:用于说明该数据的长度类型，取值范围如下：
+			FIX:表明为固定长度
+			LLASC:表明二位变长，长度使用ASCII码存储，占用2个字节
+			LLLASC:表明三位变长，长度使用ASCII码存储，占用3个字节
+			LLBCD:表明二位变长，长度使用BCD压缩，占用1个字节
+			LLLBCD:表明三位变长，长度使用右靠BCD压缩，占用2个字节（前端补零）
+		compress-mode：用于指定数据内容的存储方式，取值有（ASC、BCD、BIN）
+			ASC:表示ASCII码表示
+			BCD:表示使用BCD压缩
+			BIN:表示该域数据使用二进制存储
+		lean-mode:表示该数据域是选择左靠还是右靠,如果存储方式中使用二进制该属性值取LEFTZERO，取值方式有：
+			RIGHTSPACE：表示左靠，长度不够右边补空格
+			LEFTSPACE:表示右靠，长度不够左边补空格
+			RIGHTZERO：使用左靠BCD压缩(数据长度为奇数)，末尾补零
+			LEFTZERO：使用右靠BCD压缩(数据长度为奇数)，行首补零
+		optional:用于表示该数据的出现方式，取值如下：
+			M:Mandatory,必须出现
+			C:Conditional,一定条件下出现
+		data-mode:指明该数据内容的来源
+			取值内容有两个：Key、Value
+			Key:表数据根据xml文件中配置的key值去检索HashMap，检索不到则报错
+			Value:表示直接从配置文件中获取，例如：
+			<field id = "2" tag = "Key">acct_no</field>  ->表示根据用acct_no作为键值去检索HashMap，获取第二域的内容
+			<filed id = "2" tag = "Value">6226886003402169</field> ->表示622686003402169就是第二域的数据
+	-->
+	<head>		<!--该节点下配置报文头信息-->
+		<field id ="1"	  length = "10" length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>		<!--该节点下存放了该交易所有可能会用到的数据域-->
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0200</field><!-- 这个节点存放了报文类型信息 -->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!-- 交易处理码 -->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- POS流水号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+	
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!-- 服务点输入方式码 -->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!-- 卡片序列号 -->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!-- 服务点条件码 -->
+		
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!-- 2磁道数据 -->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!-- 3磁道数据 -->
+		
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!-- 受卡机终端标识码 -->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!-- 受卡方标识码 -->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!-- 交易货币代码 -->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!-- 个人标识码 -->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!-- 安全控制信息 -->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!-- IC卡数据域 -->
+		
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!-- 操作员号密码,域60 -->
+		<field id = "62" length = "12"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!-- 票据号 -->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!-- 信息验证码 -->
+	</body>
+	<!--mac校验域构成-->
+	<mab-filter>2|3|11|12|13|22|23|25|35|36|41|42|49|52|53|55|57|60|62</mab-filter>
+</process>
+
+<!--消费操作请求-->
+<process code = "002302" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0200</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+	
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+		
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "72"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|23|25|35|36|41|42|49|52|53|55|57|60|62</mab-filter>
+</process>
+
+
+<!--消费撤销操作请求-->
+<process code = "002303" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0200</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+	
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+		<field id = "38" length = "6"	length-type = "FIX"	    compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">idrespcode</field><!--授权码-->
+	
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "18"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|23|25|35|36|38|41|42|49|52|53|57|60|62</mab-filter>
+</process>
+
+<!--冲正操作请求-->
+<process code = "002304" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0400</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+		<field id = "38" length = "6"	length-type = "FIX"	    compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">idrespcode</field><!--3磁道数据-->
+	
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "18"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|23|25|35|36|38|41|42|49|55|60|62</mab-filter>
+</process>
+
+<!--签到请求-->
+<process code = "002308" type = "PACK">		
+	<head>
+		<field id = "1"  length = "10"   length-type = "FIX"	compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0820</field>	<!--这个节点存放了报文类型信息-->		
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--处理代码-->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "60" length = "6"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+	
+	</body>
+	<mab-filter>3|11|12|13|25|41|42|60</mab-filter>
+</process>
+
+<!--签退(结算)请求-->
+<process code = "002309" type = "PACK">	
+	<head>
+		<field id = "1"  length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0820</field>	<!--这个节点存放了报文类型信息-->		
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--处理代码-->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "60" length = "6"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "12"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"		optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "63" length = "156"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">settledata</field><!--结算信息-->
+		<field id = "64" length = "8"	length-type = "FIX"	    compress-mode = "BIN"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--消息认证码-->
+	</body>
+	<mab-filter>3|11|12|13|25|41|42|60|62|63</mab-filter>
+</process>
+
+<!--解包配置-->
+<process code = "002311" type = "UNPACK">	
+	<head>
+		<field id = "1"	 length = "10"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M"	data-mode = "Key">headerdata</field>
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">msg_tp</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">transamount</field><!--交易金额-->		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!--受卡方系统跟踪号-->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--受卡方所在地时间-->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--受卡方所在地日期-->
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "15" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">settledata</field><!--清算日期-->
+		
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">entrymode</field><!--服务点输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "28" length = "1"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">updatecode</field><!--服务点PIN获取码-->
+		
+		<field id = "32" length = "11"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">receivemark</field><!--受理方标识-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!-- 2磁道数据 -->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!-- 3磁道数据 -->
+		
+		<field id = "37" length = "12"  length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">refernumber</field><!--检索参考号-->				
+		<field id = "38" length = "6"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">idrespcode</field><!--授权应答标识码-->		
+		<field id = "39" length = "2"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">respcode</field><!--应答码-->			
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "43" length = "40"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">acceptoridname</field><!--商户名称-->
+	
+		<field id = "44" length = "128"	length-type = "LLBCD"	compress-mode = "BIN"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">addrespkey</field><!--附加响应数据-->					
+		<field id = "48" length = "512"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">adddataword</field><!--附加数据私有-->		
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "54" length = "20"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">balanceamount</field><!--附加金额-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		
+		<field id = "57" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "58" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">pbocdata</field><!--PBOC电子钱包标准交易信息-->	
+		
+		<field id = "60" length = "999"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">loadparams</field><!--下装参数-->
+		<field id = "61" length = "29"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">cardholderid</field><!--持卡人身份证-->		
+		<field id = "62" length = "12"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "63" length = "156"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">settledata</field><!--结算信息-->				
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">mesauthcode</field><!--报文校验码-->		
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|15|22|23|25|26|28|32|35|36|37|38|39|41|42|43|44|48|49|52|53|54|55|57|58|60|61|62|63</mab-filter>
+	
+</process>
+
+
+<process code = "002312" type = "UNPACK">	
+	<head>
+		<field id = "1"	 length = "22"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M"	data-mode = "Key">headerdata</field>
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">msg_tp</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!--受卡方系统跟踪号-->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaltime</field><!--受卡方所在地时间-->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaldate</field><!--受卡方所在地日期-->
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+	
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--服务点输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "28" length = "1"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">updatecode</field><!--服务点PIN获取码-->
+		
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+		<field id = "37" length = "12"  length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">refernumber</field><!--检索参考号-->				
+		<field id = "38" length = "6"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">idrespcode</field><!--授权应答标识码-->		
+		<field id = "39" length = "2"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">respcode</field><!--应答码-->			
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "43" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridname</field><!--受卡方标识码-->
+	
+		<field id = "44" length = "25"	length-type = "LLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "M" data-mode = "Key">addrespkey</field><!--附加响应数据-->					
+		<field id = "48" length = "322"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">adddataword</field><!--附加数据私有-->		
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "54" length = "20"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">balanceamount</field><!--附加金额-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		
+		<field id = "57" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">adddatapri</field><!--IC卡数据域-->
+		<field id = "58" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "M" data-mode = "Key">pbocdata</field><!--PBOC电子钱包标准交易信息-->	
+		
+		<field id = "60" length = "17"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--下装参数-->
+		<field id = "61" length = "29"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">cardholderid</field><!--持卡人身份证-->		
+		<field id = "62" length = "512"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "63" length = "163"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "M" data-mode = "Key">settledata</field><!--结算信息-->				
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">mesauthcode</field><!--报文校验码-->		
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|23|25|26|28|35|36|37|38|39|41|42|43|44|48|49|52|53|54|55|57|58|60|61|62|63</mab-filter>
+	
+</process>
+
+<!-- 预授权 -->
+<process code = "002313" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0100</field>	<!--这个节点存放了报文类型信息-->	
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+	
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!-- 受卡机终端标识码 -->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!-- 受卡方标识码 -->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!--IC卡数据域-->
+
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "12"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->	
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|23|25|35|36|41|42|49|52|53|55|57|60|62|</mab-filter>
+</process>
+
+<!-- 预授权完成 -->
+<process code = "002314" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0200</field>	<!--这个节点存放了报文类型信息-->	
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+	
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+		<field id = "38" length = "6"	length-type = "FIX"	    compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">idrespcode</field><!--授权码-->
+	
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "12"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|23|25|35|36|38|41|42|49|52|53|57|60|62|</mab-filter>
+</process>
+
+<!-- 预授权完成撤销 -->
+<process code = "002315" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0200</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+	
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+		<field id = "38" length = "6"	length-type = "FIX"	    compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">idrespcode</field><!--授权码-->
+	
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "18"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|23|25|35|36|38|41|42|49|52|53|57|60|62</mab-filter>
+</process>
+
+<!-- 预授权撤销 -->
+<process code = "002316" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0100</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+	
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+		<field id = "38" length = "6"	length-type = "FIX"	    compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">idrespcode</field><!--授权码-->
+	
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "18"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|23|25|35|36|38|41|42|49|52|53|57|60|62</mab-filter>
+</process>
+
+<!-- 联机退货 -->
+<process code = "002317" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0220</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+	
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+		<field id = "37" length = "12"  length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">refernumber</field><!--检索参考号-->				
+
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "22"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|25|35|36|37|41|42|49|57|60|62</mab-filter>
+</process>
+
+<!--脚本结果通知操作请求-->
+<process code = "002318" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0500</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">transamount</field><!--交易金额-->
+		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易时间 -->
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "32" length = "11"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">receivemark</field><!--受理方标识-->
+		<field id = "37" length = "12"  length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">refernumber</field><!--检索参考号-->
+		<field id = "38" length = "6"	length-type = "FIX"	    compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">idrespcode</field><!--授权码-->
+		
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "18"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|13|14|22|23|32|37|38|41|42|49|55|57|60|62</mab-filter>
+</process>
+
+<!--IC卡公钥下载-->
+<process code = "002319" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0500</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaldate</field><!--交易日期 -->
+		
+		<field id = "35" length = "17"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">track2data</field><!-- 2磁道数据 -->
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>3|11|12|13|35|41|42</mab-filter>
+</process>
+
+<!--IC卡参数下载-->
+<process code = "002320" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0500</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaldate</field><!--交易日期 -->
+		
+		<field id = "35" length = "17"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">track2data</field><!-- 2磁道数据 -->
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>3|11|12|13|35|41|42</mab-filter>
+</process>
+
+<!-- 电子现金充值 -->
+<process code = "002321" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0200</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->		
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "M" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "11"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "18"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|14|22|23|25|35|36|41|42|49|53|55|57|60|62</mab-filter>
+</process>
+
+<!--指定账户圈存-->
+<process code = "002322" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0200</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">transamount</field><!--交易金额-->
+		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "26" length = "2"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">pincapturecode</field><!-- 服务点PIN获取码-->
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "11"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "18"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|14|22|23|25|26|41|42|49|52|53|55|57|60|62</mab-filter>
+</process>
+
+<!--非指定账户圈存-->
+<process code = "002323" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0200</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">transamount</field><!--交易金额-->
+		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "26" length = "2"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">pincapturecode</field><!-- 服务点PIN获取码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->
+		
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "48" length = "322"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">adddataword</field><!--附加数据私有-->		
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		
+		<field id = "52" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">pindata</field><!--个人标识码-->
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "11"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "18"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|14|22|23|25|26|35|36|41|42|48|49|52|53|55|57|60|62</mab-filter>
+</process>
+
+<!-- 电子现金充值撤销 -->
+<process code = "002324" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0200</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "35" length = "37"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track2data</field><!--2磁道数据-->
+		<field id = "36" length = "104"	length-type = "LLLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">track3data</field><!--3磁道数据-->		
+		<field id = "37" length = "12"  length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">refernumber</field><!--检索参考号-->
+		
+		<field id = "38" length = "6"	length-type = "FIX"	    compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">idrespcode</field><!--授权码-->	
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->	
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		
+		<field id = "53" length = "16"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">secctrlinfo</field><!--安全控制信息-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "M" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		<field id = "57" length = "100"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddatapri</field><!--基站信息-->
+		<field id = "60" length = "11"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "18"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|14|22|23|25|35|36|37|38|41|42|49|53|55|57|60|62</mab-filter>
+</process>
+
+<!-- 脱机退货（校验） -->
+<process code = "002325" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0220</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">translocaldate</field><!--交易日期 -->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->	
+		
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "26"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->
+		
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|22|23|25|41|42|49|60|62</mab-filter>
+</process>
+
+<!-- 脱机消费上送（脱机退货） -->
+<process code = "002326" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0320</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaldate</field><!--交易日期 -->
+		<field id = "14" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">expireddate</field><!--卡有效期-->
+		
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		<field id = "25" length = "2"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">conditionmode</field><!--服务点条件码-->
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->	
+		
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "48" length = "322"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">adddataword</field><!--附加数据私有-->		
+		<field id = "49" length = "3"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">transcurrcode</field><!--交易货币代码-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "C" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTZERO"		optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "62" length = "20"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">batchbillno</field><!--批次号票据号-->	
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|14|22|23|25|41|42|48|49|55|60|62</mab-filter>
+</process>
+
+<!-- 交易证书（TC）上送 -->
+<process code = "002327" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0500</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaldate</field><!--交易日期 -->
+		<field id = "37" length = "12"  length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">refernumber</field><!--检索参考号-->
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->	
+		
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "M" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		<field id = "60" length = "8"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">loadparams</field><!--操作员密码-->
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|11|12|13|37|41|42|55|60</mab-filter>
+</process>
+
+<!-- 交易信息（AAC、ARPC）上送 -->
+<process code = "002328" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0500</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "2"  length = "19"	length-type = "LLBCD"	compress-mode = "BCD"			lean-mode = "RIGHTZERO"		optional = "C" data-mode = "Key">priaccount</field><!--主账号-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->	
+		<field id = "4"	 length = "12"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transamount</field><!--交易金额-->
+		
+		<field id = "11" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">systraceno</field><!-- 受卡方系统跟踪号 -->
+		
+		<field id = "12" length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaltime</field><!--交易时间 -->
+		<field id = "13" length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">translocaldate</field><!--交易日期 -->
+		<field id = "22" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">entrymode</field><!--POS输入方式码-->
+		<field id = "23" length = "3"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "C" data-mode = "Key">seqnumber</field><!--卡片序列号-->
+		
+		<field id = "37" length = "12"  length-type = "FIX"		compress-mode = "ASC"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">refernumber</field><!--检索参考号-->
+		<field id = "41" length = "8"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">terminalid</field><!--受卡机终端标识码-->	
+		
+		<field id = "42" length = "15"	length-type = "FIX"		compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">acceptoridcode</field><!--受卡方标识码-->
+		<field id = "48" length = "322"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "C" data-mode = "Key">adddataword</field><!--附加数据私有-->		
+		
+		<field id = "55" length = "255"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "M" data-mode = "Key">icdata</field><!--IC卡数据域-->
+		<field id = "63" length = "156"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "LEFTSPACE"		optional = "M" data-mode = "Key">settledata</field><!--结算信息-->				
+		
+		<field id = "64" length = "8"	length-type = "FIX"		compress-mode = "BIN"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">mesauthcode</field><!--报文校验码-->
+	</body>
+	<mab-filter>2|3|4|11|12|13|22|23|37|41|42|48|55|63</mab-filter>
+</process>
+
+<!-- 反激活功能 -->
+<process code = "002329" type = "PACK">	
+	<head>
+		<field id ="1"	 length = "10"  length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">headerdata</field><!--这个节点存放了报文头信息-->
+	</head>
+	<body>
+		<field id ="0"	 length = "4"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Value">0800</field>	<!--这个节点存放了报文类型信息-->
+		<field id = "3"  length = "6"	length-type = "FIX"		compress-mode = "BCD"			lean-mode = "LEFTZERO"		optional = "M" data-mode = "Key">transprocode</field><!--交易处理码-->
+		
+		<field id = "48" length = "512"	length-type = "LLLBCD"	compress-mode = "ASC"			lean-mode = "RIGHTSPACE"	optional = "M" data-mode = "Key">adddataword</field><!--附加数据私有-->
+	</body>
+	<mab-filter>3|48</mab-filter>
+</process>
+</root>	
+

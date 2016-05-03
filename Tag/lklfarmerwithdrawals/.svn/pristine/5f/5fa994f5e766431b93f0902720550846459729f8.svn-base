@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lkl.farmerwithdrawals"
+    android:versionCode="1"
+    android:versionName="1.0.0" 
+    android:sharedUserId="android.uid.system">
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="15" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="centerm.permission.provider.READ_REGION" />
+
+    <permission
+        android:name="centerm.permission.provider.READ_REGION"
+        android:label="@string/user_defined"
+        android:permissionGroup="@string/user_defined"
+        android:protectionLevel="signature" >
+    </permission>
+    <permission
+        android:name="centerm.permission.broadcast.RECEIVE"
+        android:label="@string/user_defined"
+        android:protectionLevel="signature" >
+    </permission>
+
+    <application
+        android:name="com.centerm.lklcpos.LklcposApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/helplogo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- 应用主入口activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.WebViewActivity"
+            android:theme="@style/Transparent" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 待机页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.StandbyActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.Standby" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 主菜单activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.MenuSpaceActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.mainMenu" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 退出应用程序提示框activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.DialogActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.dailog" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 设置activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.SettingsActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.Settings" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 设置activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.LklcposSettingsActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+
+        <!-- 清楚流水数据对话框activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.ClearDataDialogActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.clearDataDailog" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 输入 金额页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.InputMoneyActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.consume.inputMoney" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 刷卡页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.SwipeCardActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.swipe" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 输密页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.ExPinPadActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.inputPassword" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 输入凭证号/原授权号页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.InputVoucherActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.inputvoucher" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 显示结果页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.ShowResultActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.showresult" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 操作员权限页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.AuthorizeActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 业务告知页面 -->
+        <activity android:name="com.centerm.lklcpos.activity.NoticeActivity">
+            
+        </activity>
+        <!-- 打印等待界面 -->
+        <activity android:name="com.centerm.lklcpos.activity.ShowPrintResult">
+            
+        </activity>
+        
+        <activity
+            android:name="com.centerm.lklcpos.activity.ConfirmInformation"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.confirminformation" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.activity.QueryTransactionDetails"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.activity.ReprintMainActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.activity.InputBillnoActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.activity.LocalConfirmInformation"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.SettingMainActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.MerchantParamSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.MenuParamSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.ConnectParamSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.SystemParamSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.CommuParamSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.ResetPawSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.OtherSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.TransSwitchSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.HandInputCarNum"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 自助开通管理 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.SelfOpenActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 一键激活欢迎页 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.OneShotWelcomeActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 一键激活 验证码输入界面 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.OneShotValidateActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 一键激活SN确认 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.OneShotActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 一键激活交互 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.OneShotNetworkActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:theme="@style/Transparent" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.progress" />
+                <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            </intent-filter>
+        </activity>
+        <!-- 一键激活商終信息確認 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.OneShotMerchantActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <!-- 一键激活結果顯示 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.OneShotResultActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.centerm.lklcpos.activity.InputCardValidDate"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.inputvaliddate" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 打印时弹出的对话框activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.PrintAgianDialog"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 网络交互页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.NetworkActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:theme="@style/Transparent" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.progress" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 下载证书页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.DownLoadCerActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.donwloadcer" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 管理页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.ManagerActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.manager" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 修改密码activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.ChangePasswordActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.changepassword" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 输入原交易参考号Activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.InputOldTransferNo"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.input_transfer_no" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 输入交易日期 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.InputTransDate"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.input_trans_date" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 运维人员权限验证界面 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.OperpswdActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 其他界面 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.OtherActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 非接挥卡界面 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.NonContactActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 非接挥卡界面 -->
+        <activity
+            android:name=".activity.NonContactReadLogActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 非接结果界面 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.NonContactResultActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 非接查看日志界面 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.NonContactShowLogActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+        </activity>
+
+        <!-- 交易超时对话框 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.TimeOutDialog"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.timeoutdialog" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 终端密钥管理 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.PosKeyManager"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.SetMkeyId"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.OperLoadDownMak"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+        <!-- IC卡参数管理 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.IcCardParamManager"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+        <!-- add by txb 20131101用于设置相关activity -->
+        <!-- 终端参数设置 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.TermParamSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+        <!-- 通讯参数设置 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.CommunicationParamSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+        <!-- 交易功能设置 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.TransFunctionSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+        <!-- 交易功能设置 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.ChangeTermPassword"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+        <!-- 其他功能设置 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.OtherFunctionSetting"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+        <!-- 时间设置 -->
+        <activity
+            android:name="com.centerm.lklcpos.settings.activity.DateTime"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:theme="@style/DialogStyle" />
+
+        <!-- 圈存 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.TransferMenuActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" />
+
+        <!-- 插、挥卡页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.TransferSwipeCardActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.transferswipe" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 圈存网络交互页面activity -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.TransferNetworkActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize"
+            android:theme="@style/Transparent" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.transferprogress" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 脱机退货输入原终端号 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.InputTransTerminalid"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.input_terminalid" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 脱机退货输入原批次号 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.InputTransBatchno"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.input_trans_batchno" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 脱机退货输入原凭证号 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.InputTransBillno"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.input_trans_billno" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 电子现金普通消费插卡界面 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.IcSwipeCardActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.icswipe" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 电子现金快速支付挥卡界面 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.RfSwipeCardActivity"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.rfswipe" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 电子现金插卡/挥卡界面 -->
+        <activity
+            android:name="com.centerm.lklcpos.activity.RforIcSwipeCard"
+            android:configChanges="touchscreen|navigation|fontScale|uiMode|keyboardHidden|orientation|screenSize|screenLayout|keyboard|navigation|smallestScreenSize" >
+            <intent-filter>
+                <action android:name="com.lkl.farmer.rforicswipe" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 签到成功失败界面界面 -->
+        <activity android:name="com.centerm.lklcpos.activity.ActivateSucceedActivity" >
+        </activity>
+
+        <provider
+            android:name="com.centerm.lklcpos.provider.LklcposProvider"
+            android:authorities="com.centerm.LklcposProvider1"
+            android:readPermission="centerm.permission.provider.READ_REGION" >
+        </provider>
+
+        <service android:name="com.centerm.lklcpos.service.StandbyService" />
+
+        <activity
+            android:name=".NoticeActivity"
+            android:label="@string/title_activity_notice" >
+        </activity>
+    </application>
+
+</manifest>

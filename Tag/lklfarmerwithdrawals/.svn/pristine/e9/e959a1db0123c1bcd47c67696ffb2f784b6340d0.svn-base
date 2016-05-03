@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:gravity="center"
+    android:background="@drawable/transback">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="64dip"
+            android:paddingLeft="15dip"
+            android:paddingTop="16dip"
+            android:text="@string/message_lable_text"
+            android:textColor="@color/dialog_lable_text"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="551dip"
+            android:layout_height="3dip"
+            android:background="@color/dialog_lable_text" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/dialog_message"
+                android:layout_width="wrap_content"
+                android:layout_height="48dip"
+                android:paddingLeft="15dip"
+                android:textColor="@color/black"
+                android:textSize="25sp" 
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/dialog_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#EC0000"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/dialog_message2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="551dip"
+            android:layout_height="1dip"
+            android:background="@color/dialog_device_view" />
+
+        <RelativeLayout
+            android:layout_width="551dip"
+            android:layout_height="55dip" >
+
+            <ImageView
+                android:id="@+id/cancel"
+                android:layout_width="275dip"
+                android:layout_height="55dip"
+                android:background="@drawable/dialog_btn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="115dip"
+                android:text="@string/cancel_text"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/device_view"
+                android:layout_width="1dip"
+                android:layout_height="55dip"
+                android:layout_toRightOf="@id/cancel"
+                android:background="@color/dialog_device_view"
+                android:orientation="vertical" />
+
+            <ImageView
+                android:id="@+id/comfirm"
+                android:layout_width="275dip"
+                android:layout_height="55dip"
+                android:layout_toRightOf="@id/device_view"
+                android:background="@drawable/dialog_btn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="390dip"
+                android:text="@string/comfirm_text"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

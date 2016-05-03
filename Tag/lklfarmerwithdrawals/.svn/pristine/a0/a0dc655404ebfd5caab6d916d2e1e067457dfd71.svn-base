@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_background"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        layout="@layout/lakala_title" />
+
+    <RelativeLayout
+        android:id="@+id/lablebg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/lablemessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#FFFFFF"
+            android:textSize="38.4dp" />
+
+        <ImageView
+            android:id="@+id/lableicon"
+            android:layout_width="64.0dip"
+            android:layout_height="76.8dip"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/lablemessage" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/binputbg"
+        android:gravity="center" >
+
+        <RelativeLayout
+            android:id="@+id/result_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" >
+
+            <ImageView
+                android:id="@+id/result_image"
+                android:layout_width="105dip"
+                android:layout_height="105dip"
+                android:layout_marginTop="90dip"
+                android:layout_centerVertical="true"
+                android:background="@drawable/success" />
+
+            <TextView
+                android:id="@+id/result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/result_image"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/result_image"
+                android:textSize="51.2sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/result_massage_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/result_ll"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:textSize="38.4sp" />
+
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="250dip"
+            android:layout_height="80dip"
+            android:layout_below="@id/result_massage_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/activate_btn"
+            android:text="确定"
+            android:textColor="#FFFFFF"
+            android:textSize="38.4dp" />
+    </RelativeLayout>
+
+</LinearLayout>

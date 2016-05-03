@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="left|top"
+    android:orientation="vertical" >
+
+    <!-- 标题 -->
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+		android:layout_height="79dip"
+        android:background="@drawable/topbg"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="20dip"
+            android:layout_height="60dip"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="20dip"
+            android:background="@drawable/return_icon"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/transType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="#FFFFFF"
+            android:textSize="42sp" />
+
+        <Button
+            android:id="@+id/confirmSave"
+            android:layout_width="172dip"
+            android:layout_height="51dip"
+            android:layout_gravity="right"
+            android:paddingRight="15dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/activate_btn"
+            android:text="@string/confirmchange"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </FrameLayout>
+    <!-- 滚动视图 -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="520dip"
+        android:background="@drawable/menu_background"
+        android:gravity="center"
+        android:overScrollMode="always" >
+
+        <LinearLayout
+            android:layout_width="700dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:background="@drawable/menu_background"
+            android:gravity="left|top"
+            android:orientation="vertical" >
+
+            <!-- 商户编号设置 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/merchnt_NoText"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/merchnt_no" />
+
+                <EditText
+                    android:id="@+id/mechnt_No"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/merchnt_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FF0000"
+                    android:textSize="18dip"
+                    android:visibility="gone" />
+            </LinearLayout>
+            <!-- 终端编号设置 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/term_NoText"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/term_no" />
+
+                <EditText
+                    android:id="@+id/term_No"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    android:textSize="20sp" />
+                <!-- 提示框 -->
+
+                <TextView
+                    android:id="@+id/termno_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FF0000"
+                    android:textSize="18dip"
+                    android:visibility="gone" />
+            </LinearLayout>
+            <!-- 商户名称设置 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/merchtNameTextView"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/merchntName" />
+
+                <EditText
+                    android:id="@+id/merchntNameEt"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入商户名称"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 当前年份 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/curYear"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/curYear" />
+
+                <EditText
+                    android:id="@+id/curYearEt"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 当前流水号 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/curSerialNo"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/curSerialNo" />
+
+                <EditText
+                    android:id="@+id/curSerialNoEt"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 当前批次号 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/curBatchNo"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/curBatchNo" />
+
+                <EditText
+                    android:id="@+id/curBatchNoEt"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 当前凭证号 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/curTicketNo"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/curTicketNo" />
+
+                <EditText
+                    android:id="@+id/curTicketNoEt"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 最大退货金额 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/maxRegoodAmount"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/maxRegoodAmount" />
+
+                <EditText
+                    android:id="@+id/maxRegoodAmountEt"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 提示打印明细 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linearlayout_press_style"
+                android:gravity="left|center"
+                android:onClick="suchFunctionNotOpen"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/printDetailInfoTip"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/printDetailInfoTip" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/isPrintDetailInfo_slipSwitch"
+                    style="@style/imageview_box_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+            <!-- 商行代码 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/merchnt_hang_code"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/merchnt_hang_code" />
+
+                <EditText
+                    android:id="@+id/merchnt_hang_codeEt"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 本地地区码 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/local_area_code"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/local_area_code" />
+
+                <EditText
+                    android:id="@+id/local_area_codeEt"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 签购单打印英文 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                 android:background="@drawable/linearlayout_press_style"
+                android:gravity="left|center"
+                android:onClick="suchFunctionNotOpen"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/print_english"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/paper_print_english" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/isPrintEnglish_slipSwitch"
+                    style="@style/imageview_box_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+            <!-- 抬头内容选择 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linearlayout_press_style"
+                android:gravity="left|center"
+                android:onClick="suchFunctionNotOpen"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/taitouContentSelect"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/taitouContentSelect" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/taitouSelect_slipSwitch"
+                    style="@style/imageview_box_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+            <!-- 抬头自定义内容,根据开关内容选择是否可见 -->
+
+            <LinearLayout
+                android:id="@+id/selfDefineTaiTouContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|center"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="请输入抬头内容:" />
+
+                <EditText
+                    android:id="@+id/selfDefineTaiTouContentEt"
+                    style="@style/inputBg"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 默认交易设置 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/default_transaction"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/defaultTransaction" />
+
+                <RadioGroup
+                    android:id="@+id/defaultTransaction_radiuGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="默认交易"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/id_consume"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="消费" >
+                    </RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/id_preauth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="预授权" >
+                    </RadioButton>
+                </RadioGroup>
+            </LinearLayout>
+            <!-- 消费撤销是否用卡 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linearlayout_press_style"
+                android:gravity="left|center"
+                android:onClick="suchFunctionNotOpen"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/isConsumeRevocationUseCard"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/isConsumeRevocationUseCard" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/isConsumeRevocationUseCard_slipSwitch"
+                    style="@style/imageview_box_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+            <!-- 预授权完成撤销是否用卡 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                 android:background="@drawable/linearlayout_press_style"
+                android:gravity="left|center"
+                android:onClick="suchFunctionNotOpen"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/isAuthorizationCompleteRevocationUseCard"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/isAuthorizationCompleteRevocationUseCard" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/isAuthorizationCompleteRevocationUseCard_slipSwitch"
+                    style="@style/imageview_box_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+            <!-- 消费撤销是否需要输入密码 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                 android:background="@drawable/linearlayout_press_style"
+                android:gravity="left|center"
+                android:onClick="suchFunctionNotOpen"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/isConsumeRevocationInputPassword"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/isConsumeRevocationInputPassword" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/isConsumeRevocationInputPassword_slipSwitch"
+                    style="@style/imageview_box_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+            <!-- 预授权撤销是否需要输入密码 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                 android:background="@drawable/linearlayout_press_style"
+                android:gravity="left|center"
+                android:onClick="suchFunctionNotOpen"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/isAuthorizationRevocationInputPassword"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/isAuthorizationRevocationInputPassword" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/isAuthorizationRevocationInputPassword_slipSwitch"
+                    style="@style/imageview_box_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+            <!-- 预授权完成撤销是否需要输入密码 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linearlayout_press_style"
+                android:gravity="left|center"
+                android:onClick="suchFunctionNotOpen"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/isAuthorizationCompleteRevocationInputPassword"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/isAuthorizationCompleteRevocationInputPassword" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/isAuthorizationCompleteRevocationInputPassword_slipSwitch"
+                    style="@style/imageview_box_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+            <!-- 预授权完成请求是否需要输入密码 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linearlayout_press_style"
+                android:gravity="left|center"
+                android:onClick="suchFunctionNotOpen"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/isAuthorizationCompleteRequestInputPassword"
+                    style="@style/term_param_setting_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/isAuthorizationCompleteRequestInputPassword" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/isAuthorizationCompleteRequestInputPassword_slipSwitch"
+                    style="@style/imageview_box_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

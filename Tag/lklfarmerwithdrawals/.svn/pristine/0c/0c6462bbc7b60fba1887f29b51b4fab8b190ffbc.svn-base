@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/lakala_title" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" 
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/client_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25.6dip"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="请确认商终信息"
+            android:textColor="@color/black"
+            android:textSize="33.28sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="76.8dip"
+            android:layout_marginTop="38.4dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_no"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="25.6sp" />
+
+            <EditText
+                android:id="@+id/merid"
+                android:layout_width="332.8dip"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_button"
+                android:ellipsize="end"
+                android:maxLength="15"
+                android:textSize="23sp"
+                android:inputType="number"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="76.8dip"
+            android:layout_marginTop="38.4dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/term_number"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="25.6sp" />
+
+            <EditText
+                android:id="@+id/termid"
+                android:layout_width="332.8dip"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_button"
+                android:ellipsize="end"
+                android:maxLength="8"
+                android:inputType="number"
+                android:textSize="23sp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="76.8dip"
+            android:layout_marginTop="38.4dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_name"
+                android:textColor="@color/dialog_lable_text"
+                android:textSize="25.6sp" />
+
+            <EditText
+                android:id="@+id/mchntname"
+                android:layout_width="332.8dip"
+                android:layout_height="wrap_content"
+                android:background="@color/dialog_button"
+                android:ellipsize="end"
+                android:textSize="23sp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64.0dip"
+            android:background="@drawable/button_style"
+            android:text="@string/next_text"
+            android:textColor="#FFFFFF"
+            android:textSize="30.72sp" />
+    </LinearLayout>
+
+</LinearLayout>

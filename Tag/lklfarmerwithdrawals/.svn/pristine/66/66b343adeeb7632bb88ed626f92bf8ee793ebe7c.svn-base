@@ -1,0 +1,284 @@
+package com.centerm.lklcpos.settings.activity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ListView;
+
+import com.centerm.comm.persistence.dao.ParamConfigDao;
+import com.centerm.comm.persistence.helper.DBOperation;
+import com.centerm.comm.persistence.impl.HykTransRecordDaoImpl;
+import com.centerm.comm.persistence.impl.ParamConfigDaoImpl;
+import com.centerm.lklcpos.activity.BaseActivity;
+import com.centerm.lklcpos.activity.OneShotValidateActivity;
+import com.centerm.lklcpos.http.ErrInfo;
+import com.centerm.lklcpos.http.LklAndroidClient;
+import com.centerm.lklcpos.transaction.entity.Shortcut;
+import com.centerm.lklcpos.transaction.entity.Transaction;
+import com.centerm.lklcpos.util.DialogFactory;
+import com.centerm.lklcpos.util.DialogMessage;
+import com.centerm.lklcpos.util.HexUtil;
+import com.centerm.lklcpos.util.Utility;
+import com.centerm.lklcpos.view.MenuGridAdapter;
+import com.lkl.farmerwithdrawals.R;
+
+public class SelfOpenActivity extends BaseActivity {
+
+	private Logger log = Logger.getLogger(SelfOpenActivity.class);
+
+	private ParamConfigDao mParamConfigDao;
+
+	private Transaction mTransaction;
+
+	private String tpdu;
+
+	private String mesauthcode;
+
+	private Map<String, String> dataMap;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.other_settings_layout);
+
+		mParamConfigDao = new ParamConfigDaoImpl(this);
+
+		ListView gridView = (ListView) this.findViewById(R.id.gridView);
+		List<Shortcut> shortcut = new ArrayList<Shortcut>();
+
+		// 一键激活
+		Shortcut view1 = new Shortcut(R.drawable.oneshot, R.string.one_shot);
+		shortcut.add(view1);
+
+		// 商户信息注销
+		Shortcut view2 = new Shortcut(R.drawable.merchant_withdraw, R.string.merchant_withdraw);
+		shortcut.add(view2);
+
+		MenuGridAdapter adapter = new MenuGridAdapter(SelfOpenActivity.this, shortcut, true);
+		gridView.setAdapter(adapter);
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				Intent intent = new Intent();
+				switch (position) {
+				case 0:
+					// intent.setClass(SelfOpenActivity.this,
+					// OneShotActivity.class);
+					// startActivity(intent);
+					// addActivityAnim();
+					if (!Utility.sysForSH()) { // 北京终端
+						if (!Utility.check1850Version(SelfOpenActivity.this)) {// 判断1850版本
+							Dialog dialog = new DialogMessage(SelfOpenActivity.this).alert("提示", "请先升级驱动",
+									new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss();
+
+								}
+							}, null);
+							dialog.show();
+							return;
+						}
+					}
+
+					if (Utility.isNeedSettle(SelfOpenActivity.this)) { // 需结算
+						DialogFactory.showTips(SelfOpenActivity.this, "请先结算!");
+						return;
+					}
+					if ("1".equals(mParamConfigDao.get("enabled"))) { // 已开通状态
+						// DialogFactory.showTips(SelfOpenActivity.this,
+						// "请先结算!");
+						Intent mIntent = new Intent();
+						mIntent.setAction("com.lkl.farmer.clearDataDailog");
+						mIntent.putExtra("clear", "reOpen");
+						startActivityForResult(mIntent, 0);
+						addActivityAnim();
+						return;
+					}
+
+					intent = new Intent(SelfOpenActivity.this, OneShotValidateActivity.class);
+
+					Bundle bundle = new Bundle();
+					bundle.putString("step", "1");
+					intent.putExtras(bundle);
+					startActivity(intent);
+					addActivityAnim();
+					intent = null;
+					break;
+				case 1:
+					HykTransRecordDaoImpl hykdao = new HykTransRecordDaoImpl(SelfOpenActivity.this);
+
+					if (hykdao.getTransCount() > 0) {
+						DialogFactory.showTips(SelfOpenActivity.this, "请先进入发卡通结算!");
+						return;
+					}
+					if (Utility.isNeedSettle(SelfOpenActivity.this)) { // 需结算
+						DialogFactory.showTips(SelfOpenActivity.this, "请先结算!");
+						return;
+					}
+					Intent mIntent = new Intent();
+					mIntent.setAction("com.lkl.farmer.clearDataDailog");
+					mIntent.putExtra("clear", "selfopen");
+					startActivityForResult(mIntent, 0);
+					addActivityAnim();
+
+					// mParamConfigDao.save("merid", "");
+					// mParamConfigDao.save("termid", "");
+					// mParamConfigDao.save("mchntname", "");
+					// mParamConfigDao.save("enabled", "0");
+					// mParamConfigDao.save("signsymbol", "0");
+					// try {
+					// LklAndroidClient.getInstance(SelfOpenActivity.this).deleteClientP12();
+					// } catch (Exception e) {
+					// log.error("删除证书失败",e);
+					// }
+					// DialogFactory.showTips(SelfOpenActivity.this,
+					// "商户信息注销成功！");
+					break;
+				default:
+					break;
+				}
+			}
+		});
+
+		Button backBtn = (Button) findViewById(R.id.back);
+		backBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				removeActivity();
+				outActivityAnim();
+			}
+		});
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if (requestCode == 0) {
+			switch (resultCode) {
+			case RESULT_OK:
+				log.info("-----------------------商户信息注销，进行反激活");
+				Intent intent = Utility.autoAuti();
+				startActivityForResult(intent, 1);
+				addActivityAnim();
+				break;
+			case RESULT_CANCELED:
+				// DialogFactory.showTips(SelfOpenActivity.this,"商户信息注销失败！");
+				break;
+			default:
+				break;
+			}
+		} else if (requestCode == 1) {
+			switch (resultCode) {
+			case RESULT_OK:
+				DialogFactory.showTips(SelfOpenActivity.this, "商户信息注销成功！");
+				AfterAntiActive(data);
+				break;
+			case RESULT_CANCELED:
+				if (data != null) {
+					Bundle bundle = data.getExtras();
+					String respcode = bundle.getString("respcode");
+					if (respcode != null) {
+						respcode = new String(HexUtil.hexStringToByte(respcode));
+					}
+					log.info("反激活失败" + respcode);
+					String errMsg = null;
+					List<ErrInfo> errInfos = Utility.getErrInfoFromFile(this);
+					if (errMsg == null || "".equals(errMsg)) {
+						for (ErrInfo mErrInfo : errInfos) {
+							if (respcode.equals(mErrInfo.getErrcode())) {
+								errMsg = mErrInfo.getTip_info();
+							}
+						}
+					}
+					log.info("反激活失败" + errMsg);
+					DialogFactory.showTips(SelfOpenActivity.this, respcode + "," + errMsg);
+				} else {
+					DialogFactory.showTips(SelfOpenActivity.this, "商户信息注销失败！");
+				}
+				break;
+			}
+		}
+	}
+
+	// 进行组包数据获取
+	private Map<String, String> getMap() {
+		Map<String, String> resMap = new HashMap<String, String>();
+		tpdu = mParamConfigDao.get("tpdu");
+		resMap.put("headerdata", tpdu);
+		resMap.put("transprocode", "500002");
+		resMap.put("respcode", "3030");
+		resMap.put("translocaldate", Utility.getTransLocalDate());
+		resMap.put("translocaltime", Utility.getTransLocalTime());
+		String appCount = "1"; // 应用个数
+		String termid = mParamConfigDao.get("termid"); // 终端号
+		log.info("终端号：" + termid);
+		String merid = mParamConfigDao.get("merid"); // 商户号
+		log.info("商户号：" + merid);
+		String adddataword = appCount + termid + merid; // 附加数据
+		resMap.put("adddataword", adddataword);
+		mesauthcode = "0000000100000010000000110000010000000101000001100000011100001000"; // 临时使用12345678的二进制字符串表示，报文计算时会替换
+		resMap.put("mesauthcode", mesauthcode); // 64域校验码
+		return resMap;
+	}
+
+	private void AfterAntiActive(Intent data) {
+		Bundle bundle = data.getExtras();
+		String type = bundle.getString("type");
+		log.info("type:===============" + type);
+		if ("selfopen".equals(type)) {
+			// int flag1 = mParamConfigDao.save("merid", "");
+			// int flag2 = mParamConfigDao.save("termid", "");
+			// int flag3 = mParamConfigDao.save("mchntname", "");
+			// int flag4 = mParamConfigDao.save("enabled", "0");
+			// int flag5 = mParamConfigDao.save("signsymbol", "0");
+			int flag6 = 0;
+			// 重置数据库
+			DBOperation dboper = new DBOperation(SelfOpenActivity.this);
+			int flag0 = dboper.rebuildTable();
+			try {
+				flag6 = LklAndroidClient.getInstance(SelfOpenActivity.this).deleteClientP12();
+			} catch (Exception e) {
+				log.error("删除私钥证书失败", e);
+				// DialogFactory.showTips(SelfOpenActivity.this,"商户信息注销失败！");
+				return;
+			}
+			// if (flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1
+			// && flag5 == 1 && flag6 ==1) {
+			if (flag0 == 1 && flag6 == 1) {
+				DialogFactory.showTips(SelfOpenActivity.this, "商户信息注销成功！");
+				Intent intent = new Intent();
+				intent.setAction("centerm.action.lklcpos.MERCHANT_WITHDRAW");
+				intent.putExtra("type", "merchant_withdraw");
+				String permission = "centerm.permission.broadcast.RECEIVE";
+				sendBroadcast(intent);
+				log.debug("发送广播...");
+			} else {
+				DialogFactory.showTips(SelfOpenActivity.this, "商户信息注销失败！");
+			}
+		} else if ("reOpen".equals(type)) { // 重复开通
+			Intent intent = new Intent(SelfOpenActivity.this, OneShotValidateActivity.class);
+			Bundle b = new Bundle();
+			b.putString("step", "1");
+			intent.putExtras(b);
+			startActivity(intent);
+			addActivityAnim();
+			intent = null;
+		}
+	}
+
+}

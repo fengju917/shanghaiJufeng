@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TradeRoot>
+<!-- 下载证书
+	第一个组件节点：默认都是该交易流程的第一个组件
+	Condition对象中下一组件节点号为“0”，默认是返回主菜单
+	mctCode为自定义-->
+	
+<Transaction mctCode = "900004">
+    <ComponentNode curNodeId = "1">
+        <componentName>com.lkl.farmer.donwloadcer</componentName>
+        <Condition value = "1">2</Condition>
+    </ComponentNode>
+	<ComponentNode curNodeId = "2">
+        <componentName>com.lkl.farmer.progress</componentName>
+        <Condition value= "1">3</Condition>
+    </ComponentNode>
+	<ComponentNode curNodeId = "3">
+        <componentName>com.lkl.farmer.showresult</componentName>
+        <Condition value= "1">0</Condition>
+    </ComponentNode>    
+</Transaction>
+</TradeRoot>

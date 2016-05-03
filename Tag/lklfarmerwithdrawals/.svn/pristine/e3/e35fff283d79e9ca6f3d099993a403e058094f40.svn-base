@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/menu_background"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/lakala_title" />
+
+    <com.centerm.lklcpos.view.MenuSpace
+        android:id="@+id/menu_space"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="left"
+        android:orientation="horizontal" >
+    </com.centerm.lklcpos.view.MenuSpace>
+    
+    <com.centerm.lklcpos.view.MenuSpaceScreenNumView
+    	android:id="@+id/Menuspace_appscreen_num" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-44.8dip"  
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

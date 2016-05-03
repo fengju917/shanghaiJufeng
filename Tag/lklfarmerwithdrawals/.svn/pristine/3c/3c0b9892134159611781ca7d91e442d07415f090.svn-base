@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configs>
+    <termid>03000020</termid>	<!--  8位定长的字母、数字和特殊字符03000020  -->
+    <merid>860010030210008</merid> <!-- 15位定长的字母、数字和特殊字符  -->
+    <mchntname>拉卡拉测试商户</mchntname> <!-- 最长40位的字母、数字和特殊字符（后补空格需去掉） -->
+    <dealtimeout>60</dealtimeout> <!--  数字，单位:秒 -->
+    <reconntimes>3</reconntimes><!--  数字 -->
+    <tpdu>6009030000</tpdu> <!-- 10位定长的数字-->
+    <batchno>000001</batchno><!-- 6位定长的数字 -->
+    <billno>000001</billno><!-- 6位定长的数字  -->
+    <transIp>http://9.250.249.10:9888/LaKaLaNetSecurity/PadPosSev</transIp><!-- 交易连接地址-->
+    <caIp>http://9.250.249.10:9888/LaKaLaNetSecurity/MerCertDownloadSev</caIp><!-- 证书连接地址 -->
+    <pinpadType>1</pinpadType><!-- 0==外置; 1==内置  -->
+    <MerchantSev>http://9.250.249.10:9888/LaKaLaNetSecurity/MerchantSev</MerchantSev><!--商终信息下载地址  -->
+    <MasterKeySev>http://9.250.249.10:9888/LaKaLaNetSecurity/MasterKeySev</MasterKeySev><!--主密钥下载地址 -->
+    <!-- <fid>207</fid> --><!-- 测试 == 200021 ;  生产 == 207  -->
+    <fid>YP</fid><!-- 厂商号YP -->
+</configs>

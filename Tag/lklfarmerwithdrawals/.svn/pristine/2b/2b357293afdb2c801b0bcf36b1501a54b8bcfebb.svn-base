@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="dialog_bg">#F5F5F5F5</color>
+    <color name="dialog_lable_text">#CC33B5E5</color>
+    <color name="dialog_device_view">#DCDCDCDC</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#CC000000</color>
+    <color name="otner_money_color">#F5A708</color>
+    <color name="dialog_button_press">#CC81CFEB</color>
+    <color name="dialog_button">#00000000</color>
+    <color name="transparent">#9000</color>
+    
+    <color name="changetrue">#ececec</color>
+    <color name="changefalse">#dcdcdc</color>
+    <color name = "fulltransparent">#0fff</color>
+    
+    <color name="dialogbackground">#00000000</color>
+</resources>

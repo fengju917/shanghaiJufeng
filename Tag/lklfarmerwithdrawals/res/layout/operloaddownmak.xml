@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- 包含初始化窗口的样式内容 -->
+    <include
+        android:layout_width="800dip"
+        android:layout_height="79dip"
+        layout="@layout/lakala_title" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" 
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="@string/pos_input_mainkey"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+        
+	    <LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="60dip"
+            android:layout_marginTop="30dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >"
+			<TextView android:layout_width="wrap_content"
+			   	android:layout_height="wrap_content"
+			   	android:textColor="@color/dialog_lable_text"
+			   	android:text="主密钥索引："
+			   	android:textSize="20sp"/>
+		
+			<EditText android:id="@+id/mkey_edit"
+			   	android:layout_width="260dip"
+			   	android:layout_height="wrap_content"
+			   	android:singleLine="true"
+			   	android:inputType="number"
+			   	android:maxLength="1"
+			   	android:hint="（0-6）"
+			   	android:ellipsize="end"
+		  	 	android:background="@color/dialog_button"/>
+			
+		</LinearLayout>
+	
+    	<LinearLayout
+            android:layout_width="457dip"
+            android:layout_height="90dip"
+            android:layout_marginTop="30dip"
+            android:background="@drawable/set_item_back"
+            android:gravity="center"
+            android:orientation="horizontal" >
+			<TextView android:layout_width="wrap_content"
+			   	android:layout_height="wrap_content"
+			   	android:textColor="@color/dialog_lable_text"
+			   	android:text="请输入主密钥："
+			   	android:textSize="20sp"/>
+			<LinearLayout
+			    android:layout_width="240dip"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="20dip"
+			    android:orientation="vertical"
+			    >
+				<EditText android:id="@+id/premak_edit"
+				   	android:layout_width="wrap_content"
+				   	android:layout_height="wrap_content"
+				   	android:singleLine="true"
+				   	android:maxLength="16"
+				   	android:hint="请输入前16位（0-9、A-F）"
+				   	android:digits="0123456789ABCDEF"
+				   	android:nextFocusForward="@+id/nextmak_edit"
+			  	 	android:background="@color/dialog_button"/>
+				
+				<EditText android:id="@+id/nextmak_edit"
+				   	android:layout_width="wrap_content"
+				   	android:layout_height="wrap_content"
+				   	android:layout_marginTop="10dip"
+				   	android:singleLine="true"
+				   	android:maxLength="16"
+				   	android:hint="请输入后16位（0-9、A-F）"
+				   	android:digits="0123456789ABCDEF"
+				   	android:nextFocusForward="@+id/save"
+			  	 	android:background="@color/dialog_button"/>
+        		
+			</LinearLayout>
+		</LinearLayout>
+	
+    <Button
+		android:id="@+id/save"
+		android:layout_width="250dip"
+		android:layout_height="57dip"
+		android:layout_marginTop="60dip"
+		android:background="@drawable/button_style"
+		android:text="@string/save_text"
+		android:textColor="#FFFFFF"
+		android:textSize="24sp" />
+    </LinearLayout>
+</LinearLayout>

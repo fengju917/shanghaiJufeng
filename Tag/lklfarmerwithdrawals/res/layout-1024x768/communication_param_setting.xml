@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="left|top"
+    android:orientation="vertical" >
+
+    <!-- 标题 -->
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/topbg"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="20dip"
+            android:layout_height="60dip"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="25.6dip"
+            android:background="@drawable/return_icon"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/transType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="#FFFFFF"
+            android:textSize="53.76sp" />
+
+        <Button
+            android:id="@+id/confirmSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="38.4dip"
+            android:layout_marginTop="12.8dip"
+            android:gravity="center"
+            android:background="@drawable/activate_btn"
+            android:text="@string/confirmchange"
+            android:textColor="#FFFFFF"
+            android:textSize="25.6sp" />
+    </FrameLayout>
+    <!-- 滚动视图 -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top"
+        android:background="@drawable/menu_background"
+        android:overScrollMode="always" >
+
+        <LinearLayout
+            android:layout_width="960dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:background="@drawable/menu_background"
+            android:gravity="left|top"
+            android:orientation="vertical" >
+
+            <!-- GPRS设置 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="vertical"
+                android:padding="19.2dip"
+                android:paddingTop="6.4dip"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/gprsTv"
+                    style="@style/term_param_setting_style_1024x768"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/gprsTvVal"
+                    android:textColor="#FF0000" />
+                <!-- 接入号码 -->
+
+                <LinearLayout
+                    android:id="@+id/linercommunicationsetting"
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" 
+                    android:gravity="left|center">
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jieruhaoma" />
+
+                    <EditText
+                        android:id="@+id/jieruhaomaEt"
+                        style="@style/inputBg"
+                        android:layout_width="320dip"
+                        android:textSize="23sp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <!-- APN1名称 -->
+
+                <LinearLayout
+                    android:id="@+id/apnsetting"
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/apn1name" />
+
+                    <EditText
+                        android:id="@+id/apn1NameEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:textSize="25.6sp" />
+                </LinearLayout>
+                <!-- 主机1IP地址 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mainMachine1Address" />
+
+                    <EditText
+                        android:id="@+id/mainMachine1AddressEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:textSize="25.6sp" />
+                </LinearLayout>
+                <!-- 主机1端口 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mainMachine1Port" />
+
+                    <EditText
+                        android:id="@+id/mainMachine1PortEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:textSize="25.6sp" />
+                </LinearLayout>
+                <!-- 主机2IP地址 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mainMachine2Address" />
+
+                    <EditText
+                        android:id="@+id/mainMachine2AddressEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:textSize="25.6sp" />
+                </LinearLayout>
+                <!-- 主机2端口 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mainMachine2Port" />
+
+                    <EditText
+                        android:id="@+id/mainMachine2PortEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:textSize="25.6sp" />
+                </LinearLayout>
+                <!-- 是否需要用户名 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                     android:background="@drawable/linearlayout_press_style"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:onClick="suchFunctionNotOpen"
+                    android:orientation="vertical" >
+
+                    <!-- 是否需要用户名 -->
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" 
+                        android:gravity="left|center">
+
+                        <TextView
+                            style="@style/term_param_setting_style_1024x768"
+                            android:layout_width="320.0dip"
+                            android:layout_height="wrap_content"
+                            android:text="@string/isneedusername" />
+						<TextView 
+						    android:layout_width="0dip"
+						    android:layout_height="wrap_content"
+						    android:layout_weight="1"/>
+                        <ImageView
+                            style="@style/imageview_box_style"
+                            android:id="@+id/isNeedUserName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="25.6dp"
+                            android:text="" />
+                    </LinearLayout>
+                    <!-- 用户名 -->
+
+                    <LinearLayout
+                        android:id="@+id/gpreUserNameLiner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone" >
+
+                        <TextView
+                            style="@style/term_param_setting_style_1024x768"
+                            android:layout_width="320.0dip"
+                            android:layout_height="wrap_content"
+                            android:text="@string/please_input_user_name" />
+
+                        <EditText
+                            android:id="@+id/gprsUserNameEt"
+                            style="@style/inputBg"
+                            android:layout_width="320.0dip"
+                            android:layout_height="wrap_content"
+                            android:textSize="25.6sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- gprs密码 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gprspassword" />
+
+                    <EditText
+                        android:id="@+id/gprspasswordEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textSize="25.6sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 通讯参数设置 -->
+
+            <LinearLayout
+                style="@style/term_param_setting_itemlinerlayout_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_linerlayout_bg"
+                android:gravity="left|center"
+                android:orientation="vertical"
+                android:padding="19.2dip" 
+                android:paddingTop="6.4dip">
+
+                <TextView
+                    android:id="@+id/commuTv"
+                    style="@style/term_param_setting_style_1024x768"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/commuTvVal"
+                    android:textColor="#FF0000" />
+                <!-- TPDU -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tpdu"
+                       />
+
+                    <EditText
+                        android:id="@+id/tpduEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textSize="25.6sp"
+                        android:maxLength="10" />
+                </LinearLayout>
+                
+                  <!-- 通讯方式 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/connect_mode" />
+					<!-- 文本显示框和按钮框 -->
+                    <LinearLayout
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center"
+                        android:orientation="horizontal" 
+                        android:background="@drawable/connectmode_linearlayout_press_style"
+                        android:onClick="showConnectMode"
+                        android:padding="12.8dip"
+                        >
+
+                        <TextView
+                            android:id="@+id/connectModeTv"
+                            android:layout_width="256.0dip"
+                            android:layout_height="wrap_content"
+                            android:text="3G-APN"
+                            android:textSize="30.72sp"
+                            />
+                        <!-- 下拉列表 -->
+                        <ImageView 
+                           	android:layout_width="wrap_content"
+                           	android:layout_height="wrap_content"
+                           	android:background="@drawable/uparrow_style"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+                
+               <!-- 激活地址 -->
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activate_address_text" />
+
+                    <EditText
+                        android:id="@+id/activate_address_edit"
+                        style="@style/inputBg"
+                        android:layout_width="537.6dip"
+			android:textSize="23sp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                
+                 <!-- 主密钥地址 -->
+                <LinearLayout
+                    android:visibility="gone"
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/masterkey_address_text" />
+
+                    <EditText
+                        android:id="@+id/masterkey_address_edit"
+                        style="@style/inputBg"
+                        android:layout_width="537.6dip"
+			android:textSize="23sp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                
+                <!-- 连接地址 -->
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/connectAddress"
+                       />
+
+                    <EditText
+                        android:id="@+id/connectAddressEt"
+                        style="@style/inputBg"
+                        android:layout_width="537.6dip"
+                        android:textSize="23sp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <!-- 下载地址 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/downloadAddress"
+                        />
+
+                    <EditText
+                        android:id="@+id/downloadAddressEt"
+                        style="@style/inputBg"
+                        android:layout_width="537.6dip"
+                        android:textSize="23sp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <!-- 是否预拨号 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/linearlayout_press_style"
+                    android:onClick="suchFunctionNotOpen"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/isprecall" />
+					<TextView
+					    android:layout_width="0dip"
+					    android:layout_height="wrap_content"
+					    android:layout_weight="1"/>
+                    <ImageView
+                        style="@style/imageview_box_style"
+                        android:id="@+id/isprecall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="25.6dp"
+                        android:text="" />
+                </LinearLayout>
+                <!-- 交易超时时间 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transactionTimeout"
+                         />
+
+                    <EditText
+                        android:id="@+id/transactionTimeoutEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textSize="23sp"
+                        android:maxLength="3" />
+                </LinearLayout>
+                <!-- 交易重拨次数 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transactionRepeatTime"
+                        />
+
+                    <EditText
+                        android:id="@+id/transactionRepeatTimeEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textSize="23sp"
+                        android:maxLength="1" />
+                </LinearLayout>
+                
+                 <!-- 冲正次数 -->
+
+                <LinearLayout
+                    style="@style/linerlayoutbg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/term_param_setting_style_1024x768"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:text="@string/flushes_times"
+                        />
+
+                    <EditText
+                        android:id="@+id/transactionFlushesTimeEt"
+                        style="@style/inputBg"
+                        android:layout_width="320.0dip"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textSize="23sp"
+                        android:maxLength="1" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

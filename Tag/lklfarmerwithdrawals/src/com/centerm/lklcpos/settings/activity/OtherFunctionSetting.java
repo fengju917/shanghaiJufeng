@@ -1,0 +1,181 @@
+package com.centerm.lklcpos.settings.activity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
+
+import com.centerm.comm.persistence.dao.ReverseDao;
+import com.centerm.comm.persistence.dao.TransRecordDao;
+import com.centerm.comm.persistence.impl.ReverseDaoImpl;
+import com.centerm.comm.persistence.impl.TransRecordDaoImpl;
+import com.centerm.lklcpos.activity.BaseActivity;
+import com.centerm.lklcpos.transaction.entity.Shortcut;
+import com.centerm.lklcpos.util.DialogFactory;
+import com.centerm.lklcpos.view.MenuGridAdapter;
+import com.centerm.lklcpos.view.MyListViewAdapter;
+import com.lkl.farmerwithdrawals.R;
+
+/**
+ * 其他功能设置
+ * 
+ * @author Tianxiaobo
+ * 
+ */
+public class OtherFunctionSetting extends BaseActivity {
+
+	public static String CLEAR_DATA = "com.lkl.farmer.clearDataDailog";
+	private ReverseDao reverseDao;
+	private TransRecordDao transRecordDao;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.otherfunctionsetting);
+
+		inititle();
+
+		reverseDao = new ReverseDaoImpl(this);
+		transRecordDao = new TransRecordDaoImpl(this);
+		ListView listview1 = (ListView) this.findViewById(R.id.listview1);
+		List<Shortcut> shortcut = new ArrayList<Shortcut>();
+		// 清除冲正信息
+		Shortcut view1 = new Shortcut(R.drawable.clear_flushes_style, R.string.clear_reversal_info);
+		shortcut.add(view1);
+
+		// 清除交易流水
+		Shortcut view2 = new Shortcut(R.drawable.clear_trade_style, R.string.clear_transaction);
+		shortcut.add(view2);
+
+		// 参数打印
+		Shortcut view3 = new Shortcut(R.drawable.param_print_style, R.string.param_print);
+		shortcut.add(view3);
+
+		// 回响测试
+		Shortcut view4 = new Shortcut(R.drawable.echo_test_style, R.string.echo_test);
+		shortcut.add(view4);
+
+		// 切换到正常交易状态
+		Shortcut view5 = new Shortcut(R.drawable.trans_to_normal_state_style, R.string.trans_normal_trade_state);
+		shortcut.add(view5);
+
+		// 切换到测试交易状态
+		Shortcut view6 = new Shortcut(R.drawable.trans_to_trade_state_style, R.string.trans_test_trade_state);
+		shortcut.add(view6);
+
+		// 清除结算标识
+		Shortcut view7 = new Shortcut(R.drawable.clear_settle_style, R.string.clear_settle_symbol);
+		shortcut.add(view7);
+
+		// 清除报文头处理要求
+		Shortcut view8 = new Shortcut(R.drawable.clear_msghead_deal_request_style,
+				R.string.clear_message_head_deal_request);
+		shortcut.add(view8);
+
+		// 恢复出厂设置
+		Shortcut view9 = new Shortcut(R.drawable.recovery_init_data_style, R.string.recovery_init_data);
+		shortcut.add(view9);
+
+		// 时间设置
+		Shortcut view10 = new Shortcut(R.drawable.time_setting_style, R.string.time_setting);
+		shortcut.add(view10);
+
+		// 构造适配器
+		MyListViewAdapter adapter = new MyListViewAdapter(OtherFunctionSetting.this, shortcut, true);
+		listview1.setAdapter(adapter);
+		listview1.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				switch (position) {
+				case 0: // 清除冲正信息
+					Intent mIntent = new Intent();
+					mIntent.setAction(CLEAR_DATA);
+					if (reverseDao.getReverseCount() <= 0) {
+						DialogFactory.showTips(OtherFunctionSetting.this, "无冲正记录！");
+						return;
+					}
+					mIntent.putExtra("clear", "flushes");
+					startActivityForResult(mIntent, 0);
+					addActivityAnim();
+					// DialogFactory.showTips(OtherFunctionSetting.this,
+					// "暂不支持该操作");
+					break;
+				case 1: // 清除交易流水
+					// intent.setClass(OtherFunctionSetting.this,
+					// SetMkeyId.class);
+					// startActivity(intent);
+					// addActivityAnim();
+					mIntent = new Intent();
+					mIntent.setAction(CLEAR_DATA);
+					if (transRecordDao.getTransCount() <= 0) {
+						DialogFactory.showTips(OtherFunctionSetting.this, "无交易流水记录！");
+						return;
+					}
+					mIntent.putExtra("clear", "trade");
+					startActivityForResult(mIntent, 0);
+					addActivityAnim();
+					break;
+				case 2: // 参数打印
+					// intent.setClass(OtherFunctionSetting.this,OperLoadDownMak.class);
+					// startActivity(intent);
+					// addActivityAnim();
+					DialogFactory.showTips(OtherFunctionSetting.this, "此功能暂未开通");
+					break;
+				case 3: // 回响测试
+					DialogFactory.showTips(OtherFunctionSetting.this, "此功能暂未开通");
+					break;
+				case 4: // 切换到正常交易状态
+					DialogFactory.showTips(OtherFunctionSetting.this, "此功能暂未开通");
+					break;
+				case 5: // 切换到测试交易状态
+					DialogFactory.showTips(OtherFunctionSetting.this, "此功能暂未开通");
+					break;
+				case 6: // 清除结算标识
+					mIntent = new Intent();
+					mIntent.putExtra("clear", "settle");
+					mIntent.setAction(CLEAR_DATA);
+					startActivityForResult(mIntent, 0);
+					addActivityAnim();
+					break;
+				case 7: // 清除报文头处理要求
+					DialogFactory.showTips(OtherFunctionSetting.this, "此功能暂未开通");
+					break;
+				case 8: // 恢复出厂参数
+					DialogFactory.showTips(OtherFunctionSetting.this, "此功能暂未开通");
+					break;
+				case 9: // 时间设置
+					mIntent = new Intent();
+					mIntent.setClass(OtherFunctionSetting.this, DateTime.class);
+					startActivity(mIntent);
+					addActivityAnim();
+					break;
+				default:
+					break;
+				}
+			}
+
+		});
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		switch (resultCode) {
+		case RESULT_OK:
+			DialogFactory.showTips(OtherFunctionSetting.this, "清除成功！");
+			break;
+
+		default:
+			break;
+		}
+	}
+
+}

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/menu_background"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:gravity="center"
+        android:id="@+id/selfopen_failure"
+        android:layout_width="700dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:background="@drawable/load_bg" >
+
+        <ImageView
+            android:id="@+id/image_activate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="95dp"
+            android:background="@drawable/activate_no" />
+
+        <TextView
+            android:id="@+id/fail_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_activate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="激活失败"
+            android:textColor="@color/black"
+            android:textSize="35dp" />
+
+        <Button
+            android:id="@+id/btn_id_failok"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fail_msg"
+            android:layout_below="@+id/fail_msg"
+            android:layout_marginTop="21dp"
+            android:background="@drawable/activate_btn"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+    </LinearLayout>
+
+    <!-- 以下为开通成功显示 -->
+
+    <LinearLayout
+        android:id="@+id/selfopen_success"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            layout="@layout/lakala_title" />
+
+        <LinearLayout
+            android:layout_width="600dip"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dip"
+            android:layout_marginTop="8dip"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dip"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="48dip"
+                    android:layout_height="48dip"
+                    android:background="@drawable/tips_success" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_marginLeft="20dip"
+                    android:text="开通成功，请确认以下信息:"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/text_frame"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:text="商户名称:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/text_id_mchntname"
+                    android:layout_width="420dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="鲜果多水果店"
+                    android:textColor="@color/dialog_lable_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/text_frame"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:text="商户地址:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/text_id_meraddr"
+                    android:layout_width="420dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:text="中江路879号"
+                    android:textColor="@color/dialog_lable_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/text_frame"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:text="电话:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/text_id_mertel"
+                    android:layout_width="420dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="021-66668888"
+                    android:textColor="@color/dialog_lable_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/text_frame"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:text="商户号:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/text_id_merid"
+                    android:layout_width="420dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="D1GS613J00006"
+                    android:textColor="@color/dialog_lable_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/text_frame"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:text="终端号:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/text_id_termid"
+                    android:layout_width="420dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="03000020"
+                    android:textColor="@color/dialog_lable_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/text_frame"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:text="设备SN号:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/text_id_serialnum"
+                    android:layout_width="420dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="D1GS613J00006"
+                    android:textColor="@color/dialog_lable_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="left|center"
+                    android:text="提示：请核对商户信息，确认无误后点击【确认】，如发现有误请【重置】并联系客服！"
+                    android:textColor="#FF0000"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dip"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btn_id_reset"
+                    android:layout_width="256dip"
+                    android:layout_height="74dip"
+                    android:background="@drawable/activate_btn"
+                    android:text="重置"
+                    android:textColor="@color/white"
+                    android:textSize="35dp" />
+
+                <Button
+                    android:id="@+id/btn_id_confirm"
+                    android:layout_width="256dip"
+                    android:layout_height="74dip"
+                    android:layout_marginLeft="60dip"
+                    android:background="@drawable/activate_btn"
+                    android:text="确认"
+                    android:textColor="@color/white"
+                    android:textSize="35dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

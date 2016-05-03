@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="800dip"
+        android:layout_height="79dip"
+        layout="@layout/lakala_title" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/ic_swipe_bg" >
+
+        <EditText
+            android:id="@+id/swipcardET"
+            android:layout_width="600dip"
+            android:layout_height="90dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="89dp"
+            android:layout_marginRight="318dp"
+            android:background="@drawable/input"
+            android:ems="10"
+            android:hint="请输入,账号"
+            android:textColor="@color/black"
+            android:textSize="45dp" />
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/swipcardET"
+            android:layout_marginBottom="21dp"
+            android:background="@drawable/activate_btn"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:text="下一步" />
+
+    </RelativeLayout>
+
+</LinearLayout>

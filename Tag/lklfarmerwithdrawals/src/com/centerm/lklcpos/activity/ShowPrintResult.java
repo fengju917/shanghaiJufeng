@@ -1,0 +1,17 @@
+package com.centerm.lklcpos.activity;
+
+import com.lkl.farmerwithdrawals.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Window;
+
+public class ShowPrintResult extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.show_print_result);
+	}
+
+}

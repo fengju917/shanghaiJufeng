@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/showresult_background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <LinearLayout
+            android:layout_width="450dip"
+            android:layout_height="600dip"
+            android:layout_marginLeft="8dip"
+            android:gravity="center|center_vertical"
+            android:orientation="vertical" >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dip"
+                android:layout_marginLeft="10dip"
+                android:layout_gravity="left|center"
+                android:orientation="horizontal" >
+               <!--  <ImageView
+                    android:layout_width="48dip"
+                    android:layout_height="48dip"
+                    android:background="@drawable/tips_success" /> -->
+             <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:layout_gravity="left|center"
+                    android:text="请输入12位激活码:"
+                    android:textStyle="bold"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
+            <LinearLayout
+              	android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:background="@drawable/text_frame"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+        	   <TextView
+                    android:layout_width="100dip"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:layout_marginLeft="10dip"
+                    android:text="激活码:"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/text_id_validate"
+                    android:layout_width="280dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:ellipsize="end" 
+                    android:hint="请输入12位激活码"
+                    android:inputType="number"
+                    android:maxLength="12"
+                    android:singleLine="true"
+                    android:textColor="@color/dialog_lable_text"
+                    android:textSize="25sp" />
+              </LinearLayout>
+           <!--  <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="left|center"
+                    android:textColor="#FF0000"
+                    android:text ="提示：请核对商户信息，确认无误后点击【确认】，如发现有误请【重置】并联系客服！"
+                    android:textSize="15sp" />
+            </LinearLayout> -->
+            
+             <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dip"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal" >
+             <!--    <Button
+                    android:id="@+id/btn_id_reset"
+                    android:layout_width="256dip"
+                    android:layout_height="74dip"
+                    android:background="@drawable/btn_reset" /> -->
+
+                <Button
+                    android:id="@+id/btn_id_confirm"
+                    android:layout_width="256dip"
+                    android:layout_height="74dip"
+                    android:background="@drawable/btn_confirm" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

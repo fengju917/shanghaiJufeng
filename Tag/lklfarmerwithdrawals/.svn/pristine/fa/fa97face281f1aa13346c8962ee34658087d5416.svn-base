@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_background"
+    android:gravity="center"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="900dp"
+        android:layout_height="530dp"
+        android:layout_margin="50dp"
+        android:background="@drawable/load_bg"
+        android:gravity="center_horizontal"
+        android:padding="30dip" >
+
+        <TextView
+            android:id="@+id/tip_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="业务告知"
+            android:textColor="@color/black"
+            android:textSize="40dp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tip_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dip"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/maintip_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="220dip"
+            android:layout_below="@id/view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dip"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/maintip_text"
+            android:textColor="@color/black"
+            android:textSize="35dp" />
+
+        <Button
+            android:id="@+id/yes_btn"
+            android:layout_width="200dip"
+            android:layout_height="60dip"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/activate_btn"
+            android:text="知道了"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <CheckBox
+            android:id="@+id/check_isshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/yes_btn"
+            android:layout_alignLeft="@+id/yes_btn"
+            android:layout_marginBottom="31dp"
+            android:text="不再提示"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

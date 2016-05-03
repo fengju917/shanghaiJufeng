@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+	<GridView
+		android:id="@+id/gridview"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:divider="#00000000"
+		android:listSelector="@drawable/grid_item_selector"
+		android:horizontalSpacing="110dip"
+		android:verticalSpacing="50dip"
+		android:numColumns="5" />
+</LinearLayout>

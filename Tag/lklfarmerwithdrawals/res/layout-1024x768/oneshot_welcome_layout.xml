@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal" >
+
+    <!-- android:background="@drawable/welcome_background" -->
+
+    <RelativeLayout
+        android:layout_width="850dp"
+        android:layout_height="485dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="151dp"
+        android:background="@drawable/load_bg" >
+
+        <TextView
+            android:id="@+id/network_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="68dp"
+            android:text="请输入12位激活码,点击激活按钮"
+            android:textColor="@color/black"
+            android:textSize="45dp" />
+
+        <EditText
+            android:id="@+id/validateText"
+            android:layout_width="700dip"
+            android:layout_height="90dip"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/input"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="12"
+            android:textSize="60dp" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="700dip"
+            android:layout_height="90dip"
+            android:layout_alignLeft="@+id/validateText"
+            android:layout_below="@+id/validateText"
+            android:layout_marginTop="39dp"
+            android:background="@drawable/activate_btn"
+            android:gravity="center"
+            android:text="激活"
+            android:textColor="@color/white"
+            android:textSize="50dp" />
+
+        <TextView
+            android:id="@+id/enterSettingsBtn"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="22dp"
+            android:layout_toRightOf="@+id/validateText"
+            android:gravity="center"
+            android:text="设置"
+            android:textStyle="bold"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

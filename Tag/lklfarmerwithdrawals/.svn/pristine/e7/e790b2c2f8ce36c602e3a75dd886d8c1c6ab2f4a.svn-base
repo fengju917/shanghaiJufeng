@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="850dp"
+        android:layout_height="485dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/load_bg" >
+
+        <ImageView
+            android:id="@+id/progress_image_anim"
+            android:layout_width="200dip"
+            android:layout_height="200dip"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="95dp"
+            android:background="@drawable/pic_print" />
+
+        <TextView
+            android:id="@+id/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progress_image_anim"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="正在打印票，据妥善保管好你的票据"
+            android:textColor="@color/black"
+            android:textSize="45dp" />
+    </RelativeLayout>
+
+</LinearLayout>

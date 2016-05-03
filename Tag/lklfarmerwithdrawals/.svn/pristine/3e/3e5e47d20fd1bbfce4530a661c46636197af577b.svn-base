@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- 包含初始化窗口的样式内容 -->
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/lakala_title" />
+    
+    <!-- 下方整个框 -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="left"
+        android:orientation="vertical"
+        android:paddingLeft="204.8dp"
+        android:paddingTop="89.6dp">
+		<!-- 原密码 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/set_item_back"
+            android:gravity="center_vertical"
+            android:paddingLeft="25.6dip">
+            <TextView 
+	            android:layout_width="wrap_content" 
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/dialog_lable_text"
+	            android:textSize="25.6sp"
+	            android:text="@string/please_input_the_old_password"/>
+            <EditText 
+                android:id="@+id/oldpassword"
+                android:layout_width="320dip"
+                android:layout_height="64dip"
+                android:textColor="@color/black"
+                android:maxLength="6"
+	            android:textSize="25.6sp"
+	            android:layout_marginLeft="25.6dip"
+	            android:background="@color/dialog_button"
+	            android:inputType="numberPassword"/>
+        </LinearLayout>
+        
+        <!-- 新密码 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/set_item_back"
+            android:layout_marginTop="25.6dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="25.6dip">
+            <TextView 
+	            android:layout_width="wrap_content" 
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/dialog_lable_text"
+	            android:textSize="25.6sp"
+	            android:text="@string/please_input_the_new_password"/>
+            <EditText 
+                android:id="@+id/newpassword"
+                android:layout_marginLeft="51.2dip"
+                android:inputType="numberPassword"
+                android:layout_width="320dip"
+                android:layout_height="64dip"
+                android:maxLength="6"
+                android:textColor="@color/black"
+	            android:textSize="25.6sp"
+	            android:background="@color/dialog_button"/>	
+        </LinearLayout>
+        
+        <!-- 新密码确认 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/set_item_back"
+            android:layout_marginTop="25.6dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="25.6dip">
+            <TextView 
+	            android:layout_width="wrap_content" 
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/dialog_lable_text"
+	            android:textSize="25.6sp"
+	            android:text="@string/please_input_the_newconfirm_password"/>
+            <EditText 
+                android:id="@+id/newconfirmpassword"
+                android:inputType="numberPassword"
+                android:layout_marginLeft="0dp"
+                android:maxLength="6"
+                android:layout_width="320dip"
+                android:layout_height="64dip"
+                android:textColor="@color/black"
+	            android:textSize="25.6sp"
+	            android:background="@color/dialog_button"/>	
+            
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="25.6dp">
+			
+            <Button 
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25.6dip"
+                android:layout_marginLeft="153.6dip"
+                android:textColor="@color/white"
+                android:textSize="38.4sp"
+                android:gravity="center_horizontal"
+                android:text="@string/confirmchange"
+                android:background="@drawable/button_style"/>
+        </LinearLayout>
+        
+    </LinearLayout>
+</LinearLayout>

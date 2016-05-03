@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/menu_background"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="79dip"
+        layout="@layout/lakala_title" />
+
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:layout_margin="50dp"
+        android:orientation="horizontal"
+         android:weightSum="10"
+        android:background="@drawable/load_bg" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/activate_ok" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="交易成功"
+                    android:textSize="40dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="8"
+            android:orientation="vertical" 
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+             
+             >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:text="交易类型:"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+
+                <TextView
+                    android:id="@+id/trad_type"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text="助农取款"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:text="凭证号:"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+
+                <TextView
+                    android:id="@+id/proof_number"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="助农取款"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                 android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:text="卡 号:"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+
+                <TextView
+                    android:id="@+id/card_no"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="助农取款"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+            </LinearLayout>
+            
+          
+            <LinearLayout
+                android:layout_width="fill_parent"
+                 android:layout_height="0dp"
+                android:layout_weight="1"
+                 >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:text="取款金额:"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+
+                <TextView
+                    android:id="@+id/money_number"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="助农取款"
+                    android:textColor="#F70505"
+                    android:textSize="35dp" />
+            </LinearLayout>
+          
+            
+            
+            <LinearLayout
+                android:layout_width="fill_parent"
+                 android:layout_height="0dp"
+                android:layout_weight="1"
+               >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:text="手续费:"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+
+                <TextView
+                    android:id="@+id/charge_money"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="助农取款"
+                    android:textColor="#F70505"
+                    android:textSize="35dp" />
+            </LinearLayout>
+            
+           <LinearLayout
+                android:layout_width="fill_parent"
+                 android:layout_height="0dp"
+                android:layout_weight="1"
+               >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:text="交易时间:"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+
+                <TextView
+                    android:id="@+id/trade_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="助农取款"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+            </LinearLayout>
+            
+        </LinearLayout>
+    </LinearLayout>
+    
+    
+ <RelativeLayout 
+   android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginLeft="50dp"
+     android:layout_marginRight="50dp"
+     >
+
+      <Button
+          android:id="@+id/ok_button"
+          android:layout_width="350dip"
+          android:layout_height="90dip"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentTop="true"
+          android:layout_marginLeft="108dp"
+          android:background="@drawable/activate_btn"
+          android:text="完成"
+          android:textColor="@color/white"
+          android:textSize="50dp" />
+
+      <Button
+          android:id="@+id/print_receipt"
+          android:layout_width="350dip"
+          android:layout_height="90dip"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentTop="true"
+          android:layout_marginRight="125dp"
+          android:background="@drawable/activate_btn"
+          android:text="打印小票"
+          android:textColor="@color/white"
+          android:textSize="50dp" />
+
+ </RelativeLayout>
+        
+        
+        
+
+
+    
+</LinearLayout>

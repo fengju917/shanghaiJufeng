@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<configs>
+    <dealtimeout>60</dealtimeout>	<!-- 指定进行socket网络连接的超时时间 -->
+    <logParentpath>/data/lklcpos/apps/com.centerm.lklcpos/log/</logParentpath> <!-- LOG存放路径 -->
+    <logpath>/data/lklcpos/apps/com.centerm.lklcpos/log/lklcpos.log</logpath> <!-- LOG存放路径 -->
+	<islogFile>true</islogFile> <!-- 是否记录日志文件 -->
+    <rootLogLevel>DEBUG</rootLogLevel> <!-- 日志最低级别 -->
+    <logLevel>ERROR</logLevel> <!-- 日志最高级别 -->
+    <swipecard_timeout>60</swipecard_timeout> <!-- 刷卡超时时间 -->
+    <pinpad_timeout>90</pinpad_timeout> <!-- 密码键盘输入超时时间 -->
+    <pswdlength>6,6</pswdlength> <!-- 密码长度控制 -->
+    <httpEncode>utf-8</httpEncode><!--  http报文编码 -->
+    <standbytimeout>60</standbytimeout> <!-- 屏幕超时 -->
+    <printAppVersionId>YHK_C960ESHV151015A</printAppVersionId> <!-- 打印凭条版本号-->
+    <tmkKeyId_setOff>0</tmkKeyId_setOff><!-- 主密钥索引值偏移量 -->
+</configs>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="850dp"
+        android:layout_height="485dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="151dp"
+        android:background="@drawable/load_bg" >
+
+        <ImageView
+            android:id="@+id/progress_image_anim"
+            android:layout_width="200dip"
+            android:layout_height="200dip"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="95dp"
+            android:background="@drawable/pic_wait" />
+
+        <TextView
+            android:id="@+id/trans_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/progress_image_anim"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="54dp"
+            android:text="60"
+            android:textColor="#08A0F5"
+            android:textSize="75sp" />
+
+        <TextView
+            android:id="@+id/network_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progress_image_anim"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="正在读取IC卡，请稍后"
+            android:textColor="@color/black"
+            android:textSize="45dp" />
+    </RelativeLayout>
+
+</LinearLayout>

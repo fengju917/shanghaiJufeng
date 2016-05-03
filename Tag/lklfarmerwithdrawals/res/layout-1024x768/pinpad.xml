@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="79dip"
+        layout="@layout/lakala_title" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/menu_background"
+        android:gravity="center"
+        android:orientation="horizontal" 
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="1000dp"
+            android:layout_height="400dp"
+            android:background="@drawable/load_bg" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="卡号:"
+                        android:textSize="45dp" />
+
+                    <TextView
+                        android:id="@+id/card_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="88888888888888888888"
+                        android:textSize="45dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal" 
+                    android:id="@+id/money_ll">
+
+                    <TextView
+                        
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="金额:"
+                        android:textSize="45dp" />
+
+                    <TextView
+                        android:id="@+id/money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100.00"
+                        android:textColor="#F50A0A"
+                        android:textSize="45dp" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/input_mima"
+                    android:layout_width="500dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="45dp"
+                    android:background="@drawable/input_password"
+                    android:focusable="false"
+                    android:hint="在内置键盘上输入密码"
+                    android:textSize="45dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/pic_password" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

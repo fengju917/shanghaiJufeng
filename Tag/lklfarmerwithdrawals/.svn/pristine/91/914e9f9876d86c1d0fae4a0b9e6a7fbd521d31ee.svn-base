@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/lakala_title" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/scontentbg"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="870.4dip"
+                android:layout_height="76.8dip"
+                android:background="@drawable/topbg_yellow"
+                android:orientation="horizontal" >
+
+                <!--
+                 <ImageView 
+                android:layout_width="50dip"
+                android:layout_height="76.8dip"
+                android:background="@drawable/sxiaofei_icon"
+                android:gravity="left|center"/>
+                -->
+
+                <TextView
+                    android:layout_width="155.6dp"
+                    android:layout_height="76.8dip"
+                    android:layout_marginLeft="76.8dip"
+                    android:gravity="left|center"
+                    android:text="脱机退货"
+                    android:textColor="#FFFFFF"
+                    android:textSize="38.4dp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="870.4dip"
+                android:layout_height="413.33dip"
+                android:background="@drawable/binputbg"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="89.6dip"
+                    android:layout_marginTop="38.4dip"
+                    android:orientation="horizontal" >
+
+                    <!--
+                     <ImageView 
+                    android:layout_width="45dip"
+                    android:layout_height="45dip"
+                    android:layout_marginTop="5dip"
+                    android:background="@drawable/input_money"/>
+                    -->
+
+                    <TextView android:id="@+id/trans_info_lable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="51.2dp" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/trans_info"
+                    android:layout_width="665.6dip"
+                    android:layout_height="89.6dip"
+                    android:layout_marginLeft="102.4dip"
+                    android:layout_marginTop="51.2dip"
+                    android:background="@drawable/input"
+                    android:ellipsize="end"
+                    android:hint="@string/click_here_input_transdate"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingLeft="12.8dp"
+                    android:singleLine="true"
+                    android:textSize="38.4dp" />
+
+                <Button
+                    android:id="@+id/next_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="448.0dp"
+                    android:layout_marginTop="25.6dp"
+                    android:background="@drawable/button_style"
+                    android:text="@string/next"
+                    android:textColor="#FFFFFF"
+                    android:textSize="38.4dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TradeRoot>
+<!-- 余额查询
+	第一个组件节点：默认都是该交易流程的第一个组件
+	Condition对象中下一组件节点号为“0”，默认是返回主菜单-->
+<Transaction mctCode = "002301">
+    <ComponentNode curNodeId = "1">
+        <componentName>com.lkl.farmer.swipe</componentName>
+        <Condition value = "1">2</Condition>
+    </ComponentNode>
+	<ComponentNode curNodeId = "2">
+        <componentName>com.lkl.farmer.inputPassword</componentName>
+        <Condition value= "1">3</Condition>
+        <Condition value= "2">0</Condition>
+    </ComponentNode>
+	<ComponentNode curNodeId = "3">
+        <componentName>com.lkl.farmer.progress</componentName>
+        <Condition value = "1">4</Condition>
+    </ComponentNode>
+	<ComponentNode curNodeId = "4">
+        <componentName>com.lkl.farmer.showresult</componentName>
+        <Condition value = "1">0</Condition>
+    </ComponentNode>
+</Transaction>
+</TradeRoot>

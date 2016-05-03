@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="551dip"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical"
+    android:background="@color/dialog_bg"
+    android:gravity="center">
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="64dip"
+        android:paddingLeft="15dip"
+        android:paddingTop="16dip"
+        android:textSize="24sp"
+        android:text="请输入凭证号"
+        android:textColor="@color/dialog_lable_text"/>
+    <LinearLayout android:layout_width="551dip"
+        android:layout_height="3dip"
+        android:background="@color/dialog_lable_text"/>
+    <EditText 
+        android:id="@+id/editText"
+        android:layout_width="220dip"
+        android:layout_height="60dip"
+        android:maxLength="6"
+        android:inputType="number"/>
+    <LinearLayout android:layout_width="551dip"
+        android:layout_height="1dip"
+        android:background="@color/dialog_device_view"/>
+    <RelativeLayout android:layout_width="551dip"
+        android:layout_height="55dip">
+    	<Button android:id="@+id/cancel"
+    	    android:layout_width="275dip"
+    	    android:layout_height="55dip"
+    	    android:background="@drawable/dialog_btn"
+    	    android:text="取消"/>
+    	<LinearLayout android:id="@+id/device_view"
+    	    android:layout_width="1dip"
+        	android:layout_height="55dip"
+        	android:background="@color/dialog_device_view"
+        	android:orientation="vertical"
+        	android:layout_toRightOf="@id/cancel"/>
+    	<Button android:id="@+id/comfirm"
+    	    android:layout_width="275dip"
+    	    android:layout_height="55dip"
+    	    android:background="@drawable/dialog_btn"
+    	    android:layout_toRightOf="@id/device_view"
+    	    android:text="确定"/>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_background"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="700dp"
+        android:layout_height="430dp"
+        android:background="@drawable/load_bg" >
+
+        <ImageView
+            android:id="@+id/image_activate"
+            android:layout_width="200dip"
+            android:layout_height="200dip"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="95dp"
+            android:background="@drawable/activate_ok" />
+
+        <TextView
+            android:id="@+id/text_activate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_activate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="激活成功"
+            android:textColor="@color/black"
+            android:textSize="45dp" />
+    </RelativeLayout>
+
+</LinearLayout>

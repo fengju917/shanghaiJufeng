@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+	<ImageView
+    	android:id="@+id/grid_item_icon"  
+    	style="@style/imageViewStyle_1024x768"/>
+	<TextView
+   		android:id="@+id/grid_item_name"  
+    	style="@style/textViewStyle_1024x768"/>
+</LinearLayout>

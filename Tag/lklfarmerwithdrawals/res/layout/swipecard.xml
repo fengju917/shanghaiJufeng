@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/menu_background"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="79dip"
+        layout="@layout/lakala_title" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="50dp"
+        android:text="请刷卡,对应卡按照提示进行操作"
+        android:textColor="@color/black"
+        android:textSize="45dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="35dp"
+        android:background="@drawable/ic_swipe_bg" >
+
+        <EditText
+            android:id="@+id/swipcardET"
+            android:layout_width="600dip"
+            android:layout_height="90dip"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/input"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="请插卡、刷卡或挥卡"
+            android:textColor="@color/black"
+            android:textSize="45dp" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="300dp"
+            android:layout_height="90dp"
+            android:layout_alignLeft="@+id/swipcardET"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="23dp"
+            android:layout_marginLeft="384dp"
+            android:background="@drawable/activate_btn"
+            android:text="下一步"
+            android:textColor="@color/white"
+            android:textSize="45dp" />
+    </RelativeLayout>
+
+</LinearLayout>

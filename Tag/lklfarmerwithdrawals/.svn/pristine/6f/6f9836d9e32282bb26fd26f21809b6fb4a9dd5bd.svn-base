@@ -1,0 +1,154 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<error-info>
+	<item type = "A" errcode = "00" tip-info = "交易成功"></item>    
+	<item type = "C" errcode = "01" tip-info = "查询发卡方"></item>    
+	<item type = "C" errcode = "02" tip-info = "CALL BANK 查询"></item>
+	<item type = "C" errcode = "03" tip-info = "无效商户"></item>  
+	<item type = "C" errcode = "05" tip-info = "不承兑"></item>    
+	<item type = "C" errcode = "06" tip-info = "反激活失败"></item>    
+	
+	<item type = "A" errcode = "10" tip-info = "承兑部分金额"></item>    
+	<item type = "C" errcode = "12" tip-info = "无效交易"></item>    
+	<item type = "B" errcode = "13" tip-info = "无效金额"></item>    
+	<item type = "B" errcode = "14" tip-info = "无效卡号"></item>    
+	<item type = "B" errcode = "19" tip-info = "稍候重做交易"></item>   
+	 
+	<item type = "C" errcode = "23" tip-info = "不能接受的交易费"></item>    
+	<item type = "C" errcode = "24" tip-info = "接收者不支持"></item>    
+	<item type = "C" errcode = "25" tip-info = "记录不存在"></item> 
+	<item type = "C" errcode = "26" tip-info = "重复的文件更新记录"></item> 
+	<item type = "C" errcode = "27" tip-info = "文件更新域错"></item> 
+	<item type = "C" errcode = "28" tip-info = "文件锁定"></item>
+	<item type = "C" errcode = "29" tip-info = "文件更新不成功"></item>
+	<item type = "C" errcode = "30" tip-info = "格式错误"></item>  
+	<item type = "C" errcode = "31" tip-info = "交换站不支持代理方"></item>  
+	<item type = "C" errcode = "33" tip-info = "到期卡, 请没收"></item>  
+	<item type = "D" errcode = "34" tip-info = "舞弊嫌疑, 请没收"></item>    
+	<item type = "D" errcode = "35" tip-info = "与受卡行联系"></item>    
+	<item type = "D" errcode = "36" tip-info = "黑名单卡, 没收"></item>    
+	<item type = "C" errcode = "40" tip-info = "请求的功能尚不支持"></item>    
+	<item type = "D" errcode = "41" tip-info = "遗失卡, 请没收"></item>    
+	<item type = "D" errcode = "43" tip-info = "被盗卡,请没收"></item>    
+	<item type = "C" errcode = "51" tip-info = "余额不足"></item>    
+	<item type = "C" errcode = "53" tip-info = "帐户不存在"></item>    
+	<item type = "C" errcode = "54" tip-info = "过期卡"></item>    
+	<item type = "C" errcode = "55" tip-info = "正常卡, 密码不符"></item>    
+	<item type = "C" errcode = "56" tip-info = "无卡记录"></item>    
+	<item type = "C" errcode = "57" tip-info = "持卡人无效交易"></item>    
+	<item type = "C" errcode = "58" tip-info = "终端无效交易"></item>    
+	<item type = "C" errcode = "59" tip-info = "舞蔽嫌疑"></item>    
+	<item type = "C" errcode = "61" tip-info = "超限额"></item>    
+	<item type = "C" errcode = "65" tip-info = "交易次数超限"></item>   
+	<item type = "C" errcode = "68" tip-info = "接收超时"></item>   
+	<item type = "C" errcode = "75" tip-info = "超过密码次数"></item>   
+	<item type = "C" errcode = "76" tip-info = "不允许手输卡号"></item>
+	<item type = "C" errcode = "78" tip-info = "有效期错"></item>
+	<item type = "C" errcode = "79" tip-info = "帐务处理超时"></item>
+	<item type = "C" errcode = "80" tip-info = "MAC不正确"></item>
+	<item type = "C" errcode = "81" tip-info = "网间MAC不正确"></item>   
+	<item type = "C" errcode = "82" tip-info = "返回码未定义"></item>   
+	<item type = "C" errcode = "83" tip-info = "无效终端"></item>   
+	<item type = "C" errcode = "84" tip-info = "限本地卡"></item>   
+	<item type = "C" errcode = "85" tip-info = "限异地信用卡"></item>   
+	<item type = "C" errcode = "86" tip-info = "单笔核对有误"></item>   
+	<item type = "C" errcode = "88" tip-info = "网络连接失败"></item>   
+	<item type = "C" errcode = "89" tip-info = "操作员密码错"></item>   
+	<item type = "C" errcode = "90" tip-info = "系统暂停"></item>   
+	<item type = "C" errcode = "91" tip-info = "交换站未操作"></item>   
+	<item type = "C" errcode = "92" tip-info = "找不到交易终点"></item>   
+	<item type = "C" errcode = "93" tip-info = "交易违法"></item>   
+	<item type = "C" errcode = "95" tip-info = "对帐不平"></item>   
+	<item type = "C" errcode = "96" tip-info = "系统故障"></item>  
+	
+	<!-- 以下为拉卡拉互联网前置返回的错误码 -->
+	<item type = "D" errcode = "0000" tip-info = "无错误"></item>  
+	<item type = "D" errcode = "0001" tip-info = "上送数据错误"></item>  
+	<item type = "D" errcode = "0002" tip-info = "插入数据失败"></item>  
+	<item type = "D" errcode = "0003" tip-info = "安全校验失败"></item>  
+	<item type = "D" errcode = "0004" tip-info = "交易被拒绝"></item>  
+	<item type = "D" errcode = "0005" tip-info = "创建POSP连接失败"></item>  
+	<item type = "D" errcode = "0006" tip-info = "接收POSP返回失败"></item>  
+	<item type = "D" errcode = "0007" tip-info = "数据库操作异常"></item>  
+	<item type = "D" errcode = "0008" tip-info = "网络异常"></item>  
+	<item type = "D" errcode = "0009" tip-info = "数值转换异常"></item>  
+	<item type = "D" errcode = "0010" tip-info = "找不到服务器"></item>  
+	<item type = "D" errcode = "0011" tip-info = "不支持的字符"></item>  
+	<item type = "D" errcode = "0012" tip-info = "HTTP请求异常"></item>  
+	<item type = "D" errcode = "0013" tip-info = "数据读取异常"></item>  
+	<item type = "D" errcode = "0014" tip-info = "数据异常"></item>  
+	<item type = "D" errcode = "0015" tip-info = "未找到该证书信息"></item>  
+	<item type = "D" errcode = "0016" tip-info = "证书密码错误"></item>  
+	<item type = "D" errcode = "0017" tip-info = "证书文件不存在"></item>  
+	<item type = "D" errcode = "0018" tip-info = "下载证书出错"></item>  
+	<item type = "D" errcode = "0019" tip-info = "找不到应用信息"></item>  
+	<item type = "D" errcode = "0020" tip-info = "应用数据有误"></item>  
+	<item type = "D" errcode = "0021" tip-info = "应用文件不存在"></item>  
+	<item type = "D" errcode = "0022" tip-info = "未找到设备序列号对应的数据"></item> 
+	<item type = "D" errcode = "0023" tip-info = "未找到设备编号"></item> 
+	<item type = "D" errcode = "0024" tip-info = "应用文件不存在"></item> 
+	<item type = "D" errcode = "0025" tip-info = "未找到任务编号"></item> 
+	<item type = "D" errcode = "0026" tip-info = "未找到卡应用信息"></item> 
+	<item type = "D" errcode = "0027" tip-info = "未找到商户信息"></item> 
+	<item type = "D" errcode = "0028" tip-info = "未找到商户签购单名称"></item> 
+	<item type = "D" errcode = "9999" tip-info = "系统繁忙(其他未知异常"></item>  
+	
+	
+	<!-- 以下为升腾内部定义错误码 -->
+	<item type = "D" errcode = "E001" tip-info = "网络通讯异常,请重试"></item>
+	<item type = "D" errcode = "E002" tip-info = "程序错误,请联系开发商"></item>
+	<item type = "D" errcode = "E003" tip-info = "密钥注入失败,请检查密码键盘"></item>
+	<item type = "D" errcode = "E004" tip-info = "应用参数未配置,请检查"></item>
+	<item type = "D" errcode = "E005" tip-info = "平台数据解析异常"></item>
+	
+	<item type = "D" errcode = "E006" tip-info = "HTTP返回错误状态"></item>
+		
+</error-info>
+
+<!-- <error-info>
+	<item type = "A" errcode = "00" tip-info = "交易成功"></item>    
+	<item type = "C" errcode = "01" tip-info = "请持卡人与发卡银行联系"></item>    
+	<item type = "C" errcode = "03" tip-info = "无效账户"></item>    
+	<item type = "D" errcode = "04" tip-info = "此卡被没收"></item>    
+	<item type = "C" errcode = "05" tip-info = "持卡人认证失败"></item>    
+	<item type = "A" errcode = "10" tip-info = "显示部分批准金额，提示操作员"></item>    
+	<item type = "A" errcode = "11" tip-info = "成功,VIP客户"></item>    
+	<item type = "C" errcode = "12" tip-info = "无效交易"></item>    
+	<item type = "B" errcode = "13" tip-info = "无效金额"></item>    
+	<item type = "B" errcode = "14" tip-info = "无效卡号"></item>    
+	<item type = "C" errcode = "15" tip-info = "此卡无对应发卡方"></item>    
+	<item type = "C" errcode = "21" tip-info = "该卡未初始化或睡眠卡"></item>    
+	<item type = "C" errcode = "22" tip-info = "操作有误，或超出交易允许天数"></item>    
+	<item type = "C" errcode = "25" tip-info = "没有原始交易，请联系发卡方"></item>    
+	<item type = "C" errcode = "30" tip-info = "报文格式错误，请重试"></item>    
+	<item type = "D" errcode = "34" tip-info = "作弊卡，吞卡"></item>    
+	<item type = "D" errcode = "38" tip-info = "密码错误次数超限，请与发卡方联系"></item>    
+	<item type = "C" errcode = "40" tip-info = "发卡方不支持的交易类型"></item>    
+	<item type = "D" errcode = "41" tip-info = "挂失卡，请没收"></item>    
+	<item type = "D" errcode = "43" tip-info = "被窃卡，请没收"></item>    
+	<item type = "C" errcode = "51" tip-info = "可用余额不足"></item>    
+	<item type = "C" errcode = "54" tip-info = "该卡已过期"></item>    
+	<item type = "C" errcode = "55" tip-info = "密码错"></item>    
+	<item type = "C" errcode = "57" tip-info = "不允许此卡交易"></item>    
+	<item type = "C" errcode = "58" tip-info = "发卡方不允许该卡在本终端进行此交易"></item>    
+	<item type = "C" errcode = "59" tip-info = "卡片校验错"></item>    
+	<item type = "C" errcode = "61" tip-info = "交易金额超限"></item>    
+	<item type = "C" errcode = "62" tip-info = "受限制的卡"></item>    
+	<item type = "C" errcode = "64" tip-info = "原始金额不正确"></item>    
+	<item type = "C" errcode = "65" tip-info = "超出消费次数限制"></item>   
+	<item type = "C" errcode = "68" tip-info = "交易超时，请重试"></item>   
+	<item type = "C" errcode = "75" tip-info = "密码错误次数超限"></item>   
+	<item type = "C" errcode = "90" tip-info = "系统日切，请稍后重试"></item>   
+	<item type = "C" errcode = "91" tip-info = "发卡方状态不正常，请稍后重试"></item>   
+	<item type = "C" errcode = "92" tip-info = "发卡方线路异常，请稍后重试"></item>   
+	<item type = "C" errcode = "94" tip-info = "拒绝，重复交易，请稍后重试"></item>   
+	<item type = "C" errcode = "96" tip-info = "拒绝，交换中心异常，请稍后重试"></item>   
+	<item type = "D" errcode = "97" tip-info = "终端未登记"></item>   
+	<item type = "E" errcode = "98" tip-info = "发卡方超时"></item>   
+	<item type = "B" errcode = "99" tip-info = "PIN格式错误，请重新签到"></item>   
+	<item type = "B" errcode = "A0" tip-info = "MAC校验错，请重新签到"></item>   
+	<item type = "B" errcode = "A1" tip-info = "转账货币不一致"></item>   
+	<item type = "A" errcode = "A2" tip-info = "交易成功，请向发卡行确认"></item>   
+	<item type = "C" errcode = "A3" tip-info = "账户不正确"></item>   
+	<item type = "A" errcode = "A4" tip-info = "交易成功，请向发卡行确认"></item>   
+	<item type = "A" errcode = "A5" tip-info = "交易成功，请向发卡行确认"></item>   
+</error-info> -->
