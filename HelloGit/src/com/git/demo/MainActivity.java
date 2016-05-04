@@ -3,7 +3,11 @@ package com.git.demo;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-
+/**
+ * 鞠枫
+ * @author fengju
+ *
+ */
 public class MainActivity extends Activity {
 
 	@Override
